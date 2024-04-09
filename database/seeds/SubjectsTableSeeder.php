@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Users\Subjects;
 
 class SubjectsTableSeeder extends Seeder
 {
@@ -12,6 +11,19 @@ class SubjectsTableSeeder extends Seeder
      */
     public function run()
     {
-        // 国語、数学、英語を追加
-    }
+        DB::table('subjects')->insert([
+      [
+          'subject' => '国語',
+      ],
+      [
+          'subject' => '数学',
+      ],
+      [
+          'subject' => '英語',
+      ],
+      [
+          'subject' => '生徒',
+      ],
+    ]);
+  }
 }
