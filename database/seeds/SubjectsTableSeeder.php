@@ -22,9 +22,6 @@ class SubjectsTableSeeder extends Seeder
             [
                 'subject' => '英語',
             ],
-            [
-                'subject' => '生徒',
-            ],
 
         ]);
     }
