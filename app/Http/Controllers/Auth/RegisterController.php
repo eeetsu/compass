@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use DB;
+use App\Http\Requests\RegisterFormRequest;
 
 use App\Models\Users\Subjects;
 
@@ -57,21 +58,8 @@ class RegisterController extends Controller
        }
 
 
-    public function registerPost(Request $request){
-        if($request->isMethod('post')){
-            $request->validate([
-            'over_name' => 'required|string|max:10',
-            'under_name' => 'required|string|max:10',
-            'over_name_kana' => 'required|string|regex:/^[ァ-ヶー　]+$/u|max:30',
-            'under_name_kana' => 'required|string|regex:/^[ァ-ヶー　]+$/u|max:30',
-            'mail_address' => 'required|email|unique:users,mail_address|max:100',
-            'sex' => 'required|in:男性,女性,その他',
-            'old_year' => 'required|date|before_or_equal:today|after_or_equal:2001-01-01',
-            'role' => 'required|in:講師(国語),講師(数学),講師(英語),生徒',
-            'password' => 'required|string|confirmed|min:8|max:30',
-            'password_confirmation' => 'required|alpha_num|min:8|max:30|same:password',
-            ]);
-
+    public function registerPost(RegisterFormRequest $request){
+        // if($request->isMethod('post')){
             $over_name=$request->input('over_name');
             $under_name=$request->input('under_name');
             $over_name_kana=$request->input('over_name_kana');
@@ -81,7 +69,7 @@ class RegisterController extends Controller
             $old_year=$request->input('old_year');
             $role=$request->input('role');
             $password=$request->input('password');
-        }
+        // }
 
         User::create([
                 'over_name' => $over_name,
