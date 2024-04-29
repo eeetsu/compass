@@ -51,11 +51,11 @@ class UsersTableSeeder extends Seeder
             'under_name' => '旬太',
             'over_name_kana' => 'アザマ',
             'under_name_kana' => 'シュンタ',
-            'mail_address' => 'azaama12345@gmail.com',
+            'mail_address' => 'azama12345@gmail.com',
             'sex' => 1,
             'birth_day' => '1986-07-13',
             'role' => 4,
-        'password' => bcrypt('azama12345')
+            'password' => bcrypt('azama12345')
         ],
     ]);
 }
