@@ -11,6 +11,27 @@ class RegisterFormRequest extends FormRequest
      *
      * @return bool
      */
+
+     /**
+     *  rules()の前に実行される
+     *       $this->merge(['key' => $value])を実行すると、
+     *       フォームで送信された(key, value)の他に任意の(key, value)の組み合わせをrules()に渡せる
+     */
+    public function getValidatorInstance()
+    {
+        $this->merge([
+            'old_year' => $this->input('old_year') . '-' . $this->input('old_month') . '-' . $this->input('old_day')
+        ]);
+
+        // rules()に渡す値を追加でセット
+        //     これで、この場で作った変数にもバリデーションを設定できるようになる
+
+        return parent::getValidatorInstance();
+    }
+
+
+
+
     public function authorize()
     {
         return true;
@@ -29,11 +50,10 @@ class RegisterFormRequest extends FormRequest
             'over_name_kana' => 'required|string|regex:/^[ァ-ヶー ]+$/u|max:30',
             'under_name_kana' => 'required|string|regex:/^[ァ-ヶー ]+$/u|max:30',
             'mail_address' => 'required|email|unique:users,mail_address|max:100',
-            'sex' => 'required|in:男性,女性,その他',
-            'old_year' => 'required|date|before_or_equal:today|after_or_equal:2001-01-01',
-            'role' => 'required|in:講師(国語),講師(数学),講師(英語),生徒',
+            'sex' => 'required',
+            'old_year' => 'required|date_format:Y-m-d',
+            'role' => 'required',
             'password' => 'required|string|confirmed|min:8|max:30',
-            'password_confirmation' => 'required|alpha_num|min:8|max:30|same:password',
         ];
     }
      public function messages(){
@@ -47,7 +67,13 @@ class RegisterFormRequest extends FormRequest
             'old_year' => '生年月日は必須です。',
             'role' => '役職は必須です。',
             'password' => 'パスワードは必須です。',
-            'password_confirmation' => '確認用パスワードは必須です。',
+            // 'password_confirmation' => '確認用パスワードは必須です。',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $data = [];
+        $this->merge($data);
     }
 }

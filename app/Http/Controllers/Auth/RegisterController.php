@@ -16,7 +16,9 @@ use App\Models\Users\Subjects;
 
 class RegisterController extends Controller
 {
-    /*
+    /*お疲れ様です。
+
+退出いたします。
     |--------------------------------------------------------------------------
     | Register Controller
     |--------------------------------------------------------------------------
@@ -54,12 +56,13 @@ class RegisterController extends Controller
      */
     public function registerView(Request $request){
        $subjects = Subjects::all();
+    //    $errors = $request->session()->get('errors');
        return view('auth.register.register', compact('subjects'));
        }
 
-
     public function registerPost(RegisterFormRequest $request){
-        // if($request->isMethod('post')){
+        // パラメータから値を取得
+         if($request->isMethod('post')){
             $over_name=$request->input('over_name');
             $under_name=$request->input('under_name');
             $over_name_kana=$request->input('over_name_kana');
@@ -69,42 +72,45 @@ class RegisterController extends Controller
             $old_year=$request->input('old_year');
             $role=$request->input('role');
             $password=$request->input('password');
-        // }
+         }
 
-        User::create([
-                'over_name' => $over_name,
-                'under_name' => $under_name,
-                'over_name_kana' => bcrypt($over_name_kana),
-                'under_name_kana' => bcrypt($under_name_kana),
-                'mail_address' => bcrypt($mail_address),
-                'sex' => bcrypt($sex),
-                'old_year' => bcrypt($old_year),
-                'role' => bcrypt($role),
-                'password' => bcrypt($password),
-            ]);
+         $validatedData = $request->validated();
 
 
+        //  if($errors->any()){
+            //  return back()->withErrors($errors)->withInput();
+            // }
 
-        if($errors->any()){
-        return back()->withErrors($errors)->withInput();
-        }
+            DB::beginTransaction();
+            try{
+                $birth_day = $request->old_year . '-' . $request->old_month . '-' . $request->old_day;
+                $user = User::create([
+                    'over_name' => $request->over_name,
+                    'under_name' => $request->under_name,
+                    'over_name_kana' => $request->over_name_kana,
+                    'under_name_kana' => $request->under_name_kana,
+                    'mail_address' => $request->mail_address,
+                    'sex' => $request->sex,
+                    'birth_day' => $birth_day,
+                    'role' => $request->role,
+                    'password' => bcrypt($request->password),
+                ]);
 
-        DB::beginTransaction();
-        try{
-        $birth_day = $request->old_year . '-' . $request->old_month . '-' . $request->old_day;
-        $user = User::create([
-        'over_name' => $request->over_name,
-        'under_name' => $request->under_name,
-        'over_name_kana' => $request->over_name_kana,
-        'under_name_kana' => $request->under_name_kana,
-        'mail_address' => $request->mail_address,
-        'sex' => $request->sex,
-        'birth_day' => $birth_day,
-        'role' => $request->role,
-        'password' => bcrypt($request->password),
-        ]);
+                // DB::beginTransaction();と同様な意味なのでコメントアウト
+                // User::create([
+                        // 'over_name' => $over_name,
+                        // 'under_name' => $under_name,
+                        // 'over_name_kana' => bcrypt($over_name_kana),
+                        // 'under_name_kana' => bcrypt($under_name_kana),
+                        // 'mail_address' => bcrypt($mail_address),
+                        // 'sex' => intval($sex),
+                        // 'old_year' => bcrypt($old_year),
+                        // 'birth_day' => $validatedData['old_year'],
+                        // 'role' => $role,
+                        // 'password' => bcrypt($password),
+                    // ]);
 
-        $user = User::findOrFail($user->id);
+                $user = User::findOrFail($user->id);
         if ($request->filled('subject')) {
         $user->subjects()->attach($request->subject);
         }

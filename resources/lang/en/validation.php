@@ -145,7 +145,17 @@ return [
     | of "email". This simply helps us make our message more expressive.
     |
     */
-
-    'attributes' => [],
+    'attributes' => [
+    'over_name' => '姓',
+    'under_name' => '名',
+    'over_name_kana' => 'セイ',
+    'under_name_kana' => 'メイ',
+    'mail_address' => 'メールアドレス',
+    'sex' => '性別',
+    'old_year' => '生年月日',
+    'role' => '役職',
+    'password' => 'パスワード',
+    'password_confirmation' => '確認用パスワード',
+    ],
 
 ];
