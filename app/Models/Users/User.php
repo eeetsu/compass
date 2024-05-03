@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\Posts\Like;
+use App\Models\Users\Subjects;
 use Auth;
 
 class User extends Authenticatable
@@ -31,7 +32,8 @@ class User extends Authenticatable
         'sex',
         'birth_day',
         'role',
-        'password'
+        'password',
+        'deleted_at',
     ];
 
     protected $dates = ['deleted_at'];
@@ -55,7 +57,7 @@ class User extends Authenticatable
     ];
 
     public function posts(){
-        return $this->hasMany('App\Models\Posts\Post');
+        return $this->hasMany(Post::class);
     }
 
     public function calendars(){
@@ -67,7 +69,8 @@ class User extends Authenticatable
     }
 
     public function subjects(){
-        return ;$this->hasMany('App\Subject');// リレーションの定義
+        // return ;$this->hasMany('App\Subject');// リレーションの定義
+         return $this->belongsToMany('App\Models\Users\Subjects', 'subject_users', 'user_id','subject_id' );
     }
 
     // いいねしているかどうか

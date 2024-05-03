@@ -8,6 +8,7 @@ use App\Models\Users\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests\RegisterFormRequest;
@@ -16,9 +17,7 @@ use App\Models\Users\Subjects;
 
 class RegisterController extends Controller
 {
-    /*お疲れ様です。
-
-退出いたします。
+    /*
     |--------------------------------------------------------------------------
     | Register Controller
     |--------------------------------------------------------------------------
@@ -61,29 +60,21 @@ class RegisterController extends Controller
        }
 
     public function registerPost(RegisterFormRequest $request){
-        // パラメータから値を取得
-         if($request->isMethod('post')){
-            $over_name=$request->input('over_name');
-            $under_name=$request->input('under_name');
-            $over_name_kana=$request->input('over_name_kana');
-            $under_name_kana=$request->input('under_name_kana');
-            $mail_address=$request->input('mail_address');
-            $sex=$request->input('sex');
-            $old_year=$request->input('old_year');
-            $role=$request->input('role');
-            $password=$request->input('password');
-         }
-
-         $validatedData = $request->validated();
+            // パラメータから値を取得
+            $birth_day = Carbon::createFromFormat('Y-m-d', $request->old_year . '-' . $request->old_month . '-' . $request->old_day);
+            // dd($birth_day);
+            //  }
+            // 日付は文字列ではなく、date形式で行う必要あり！！！
+            $validatedData = $request->validated();
 
 
-        //  if($errors->any()){
-            //  return back()->withErrors($errors)->withInput();
-            // }
+            //  if($errors->any()){
+                //  return back()->withErrors($errors)->withInput();
+                // }
 
             DB::beginTransaction();
             try{
-                $birth_day = $request->old_year . '-' . $request->old_month . '-' . $request->old_day;
+                // $birth_day = $request->old_year . '-' . $request->old_month . '-' . $request->old_day;
                 $user = User::create([
                     'over_name' => $request->over_name,
                     'under_name' => $request->under_name,
@@ -96,30 +87,16 @@ class RegisterController extends Controller
                     'password' => bcrypt($request->password),
                 ]);
 
-                // DB::beginTransaction();と同様な意味なのでコメントアウト
-                // User::create([
-                        // 'over_name' => $over_name,
-                        // 'under_name' => $under_name,
-                        // 'over_name_kana' => bcrypt($over_name_kana),
-                        // 'under_name_kana' => bcrypt($under_name_kana),
-                        // 'mail_address' => bcrypt($mail_address),
-                        // 'sex' => intval($sex),
-                        // 'old_year' => bcrypt($old_year),
-                        // 'birth_day' => $validatedData['old_year'],
-                        // 'role' => $role,
-                        // 'password' => bcrypt($password),
-                    // ]);
+                // ユーザーが選択した科目の処理を追加
+                if ($request->filled('subject')) {
+                $user->subjects()->attach($request->subject);
+                }
 
-                $user = User::findOrFail($user->id);
-        if ($request->filled('subject')) {
-        $user->subjects()->attach($request->subject);
-        }
-
-        DB::commit();
-        return view('auth.login.login');
-        } catch(\Exception $e){
-        DB::rollback();
-        return redirect()->route('loginView');
-        }
+                DB::commit();
+                return view('auth.login.login');
+                } catch(\Exception $e){
+                DB::rollback();
+                return redirect()->route('loginView');
+                }
     }
 }
