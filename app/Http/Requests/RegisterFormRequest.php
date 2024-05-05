@@ -47,9 +47,9 @@ class RegisterFormRequest extends FormRequest
             'over_name_kana' => 'required|string|regex:/^[ァ-ヶー ]+$/u|max:30',
             'under_name_kana' => 'required|string|regex:/^[ァ-ヶー ]+$/u|max:30',
             'mail_address' => 'required|email|unique:users,mail_address|max:100',
-            'sex' => 'required',
+            'sex' => 'required|in:1,2,3',
             'birth_day' => 'required|date_format:Y-m-d',
-            'role' => 'required',
+            'role' => 'required|in:1,2,3,4',
             'password' => 'required|string|confirmed|min:8|max:30',
         ];
     }
@@ -60,9 +60,9 @@ class RegisterFormRequest extends FormRequest
             'over_name_kana.required' => 'セイは必須です。',
             'under_name_kana.required' => 'メイは必須です。',
             'mail_address.required' => 'メールアドレスは必須です。',
-            'sex.required' => '性別は必須です。',
+            'sex.in' => '性別は必須です。',
             'birth_day.required' => '生年月日は必須です。',
-            'role.required' => '役職は必須です。',
+            'role.in' => '役職は必須です。',
             'password.required' => 'パスワードは必須です。',
             // 'password_confirmation' => '確認用パスワードは必須です。',
         ];
