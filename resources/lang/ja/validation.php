@@ -152,7 +152,7 @@ return [
 'under_name_kana' => 'メイ',
 'mail_address' => 'メールアドレス',
 'sex' => '性別',
-'old_year' => '生年月日',
+'birth_day' => '生年月日',
 'role' => '役職',
 'password' => 'パスワード',
 // 'password_confirmation' => '確認用パスワード',

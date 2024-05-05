@@ -48,7 +48,7 @@ class RegisterFormRequest extends FormRequest
             'under_name_kana' => 'required|string|regex:/^[ァ-ヶー ]+$/u|max:30',
             'mail_address' => 'required|email|unique:users,mail_address|max:100',
             'sex' => 'required|in:1,2,3',
-            'birth_day' => 'required|date_format:Y-m-d',
+            'birth_day' =>  'required|date|after_or_equal:2000-01-01|before_or_equal:' . now()->format('Y-m-d'),
             'role' => 'required|in:1,2,3,4',
             'password' => 'required|string|confirmed|min:8|max:30',
         ];
