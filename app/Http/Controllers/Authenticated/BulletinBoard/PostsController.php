@@ -16,10 +16,15 @@ use Auth;
 class PostsController extends Controller
 {
     public function show(Request $request){
-        $posts = Post::with('user', 'postComments')->get();
+        $posts = Post::with('user', 'postComments','likes')->get();
         $categories = MainCategory::get();
         $like = new Like;
         $post_comment = new Post;
+
+        foreach($posts as $post){
+            $post->like_count = $post->likes->count(); // いいね数をカウントしてpostに追加
+        }
+
         if(!empty($request->keyword)){
             $posts = Post::with('user', 'postComments')
             ->where('post_title', 'like', '%'.$request->keyword.'%')
@@ -106,6 +111,9 @@ class PostsController extends Controller
         $like->like_post_id = $post_id;
         $like->save();
 
+        $post = Post::find($post_id);
+        $post->like_count = $post->likes->count(); // いいね数を再度更新
+
         return response()->json();
     }
 
@@ -119,6 +127,9 @@ class PostsController extends Controller
              ->where('like_post_id', $post_id)
              ->delete();
 
-        return response()->json();
+             $post = Post::find($post_id);
+             $post->like_count = $post->likes->count(); // いいね数を再度更新
+
+             return response()->json();
     }
 }
