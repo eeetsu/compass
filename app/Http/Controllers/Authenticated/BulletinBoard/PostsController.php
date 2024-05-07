@@ -75,8 +75,23 @@ class PostsController extends Controller
         return redirect()->route('post.show');
     }
     public function mainCategoryCreate(Request $request){
+        $validatedData = $request->validate([
+            'main_category_name' => 'required|string|max:255|unique:main_categories,main_category',
+            ]);
         MainCategory::create(['main_category' => $request->main_category_name]);
         return redirect()->route('post.input');
+    }
+
+    public function subCategoryCreate(Request $request){
+        $validatedData = $request->validate([
+            'main_category_id' => 'required|integer',
+            'sub_category_name' => 'required|string|max:255|unique:sub_categories,sub_category',
+            ]);
+        SubCategory::create([
+            'main_category_id' => $request->main_category_id,
+            'sub_category' => $request->sub_category_name,
+            ]);
+        return response()->json(['message' => 'Sub category created successfully'], 200);
     }
 
     public function commentCreate(Request $request){
