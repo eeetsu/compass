@@ -45,6 +45,11 @@
         <li class="main_categories" category_id="{{ $category->id }}"><span>{{ $category->main_category }}<span></li>
         @endforeach
       </ul>
+      <ul>
+        @foreach($categories as $category)
+        <li class="sub_categories" category_id="{{ $category->id }}"><span>{{ $category->sub_category }}<span></li>
+        @endforeach
+      </ul>
     </div>
   </div>
   <form action="{{ route('post.show') }}" method="get" id="postSearchRequest"></form>

@@ -44,8 +44,11 @@
         @endif
       </div>
       <div>
-        @if($user->role == 4)
-        <span>選択科目 :</span>
+        @if($user->role == 4) <!-- 生徒のみの場合 -->
+        <span>選択科目 : </span>
+        @foreach($user->subjects as $subject)
+        <span>{{ $subject->subject }}</span>
+        @endforeach
         @endif
       </div>
     </div>
