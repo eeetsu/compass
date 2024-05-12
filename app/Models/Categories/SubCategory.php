@@ -16,7 +16,15 @@ class SubCategory extends Model
         return $this->belongsTo(MainCategory::class);
     }
 
+    public static function getSubCategories(){
+        return self::all();
+    }
+
     public function posts(){
         return $this->hasMany(Post::class);
+    }
+
+    public static function getSubCategoriesByMainCategoryId($mainCategoryId){
+        return self::where('main_category_id', $mainCategoryId)->get();
     }
 }

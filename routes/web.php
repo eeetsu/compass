@@ -60,5 +60,10 @@ Route::group(['middleware' => 'auth','can:admin'], function(){
             Route::get('/user/profile/{id}', 'UsersController@userProfile')->name('user.profile');
             Route::post('/user/profile/edit', 'UsersController@userEdit')->name('user.edit');
         });
+
+        Route::get('/getSubCategories/{mainCategoryId}', function($mainCategoryId){
+            $subCategories = \App\Models\Categories\SubCategory::getSubCategoriesByMainCategoryId($mainCategoryId);
+            return response()->json($subCategories);
+            });
     });
 });

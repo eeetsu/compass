@@ -16,4 +16,8 @@ class MainCategory extends Model
         return $this->hasMany(SubCategory::class);
     }
 
+    public static function getMainCategories(){
+        return self::all();
+    }
+
 }

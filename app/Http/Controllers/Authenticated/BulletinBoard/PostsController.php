@@ -57,7 +57,8 @@ class PostsController extends Controller
         $post = Post::create([
             'user_id' => Auth::id(),
             'post_title' => $request->post_title,
-            'post' => $request->post_body
+            'post' => $request->post_body,
+            'sub_category_id' => $request->post_category_id, // サブカテゴリーIDを保存
         ]);
         return redirect()->route('post.show');
     }
@@ -84,15 +85,13 @@ class PostsController extends Controller
 
     public function subCategoryCreate(Request $request){
         $validatedData = $request->validate([
-            'main_category_id' => 'required|integer',
             'sub_category_name' => 'required|string|max:255|unique:sub_categories,sub_category',
             ]);
-        SubCategory::create([
-            'main_category_id' => $request->main_category_id,
-            'sub_category' => $request->sub_category_name,
-            ]);
-        return response()->json(['message' => 'Sub category created successfully'], 200);
+        SubCategory::create(['sub_category' => $request->sub_category_name,
+        'main_category_id' => $request->main_category_id]);
+         return redirect()->route('post.input');
     }
+
 
     public function commentCreate(Request $request){
         PostComment::create([
