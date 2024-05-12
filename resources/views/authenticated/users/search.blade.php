@@ -4,6 +4,7 @@
 <p>ユーザー検索</p>
 <div class="search_content w-100 border d-flex">
   <div class="reserve_users_area">
+    @if($users->count() > 0)
     @foreach($users as $user)
     <div class="border one_person">
       <div>
@@ -53,6 +54,11 @@
       </div>
     </div>
     @endforeach
+
+    @else
+    <p>検索結果はありません。</p>
+    @endif
+
   </div>
   <div class="search_area w-25 border">
     <div class="">
@@ -94,15 +100,14 @@
           </div>
           <div class="selected_engineer">
             <label>選択科目</label>
-              <form action="{{ route('user.edit') }}" method="post">
-                @foreach($subject_lists as $subject_list)
-                <div>
-                  <label>{{ $subject_list->subject }}</label>
-                  <input type="checkbox" name="subjects[]" value="{{ $subject_list->id }}">
-                </div>
-                @endforeach
+              <form action="{{ route('user.show') }}" method="get" id="userSearchRequest">
+                  @foreach($subject_lists as $subject_list)
+                  <div>
+                    <label>{{ $subject_list->subject }}</label>
+                    <input type="checkbox" name="subjects[]" value="{{ $subject_list->id }}">
+                  </div>
+                  @endforeach
                   <input type="submit" value="編集" class="btn btn-primary">
-                  <input type="hidden" name="user_id" value="{{ $user->id }}">
                 {{ csrf_field() }}
               </form>
           </div>
