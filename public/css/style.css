@@ -231,6 +231,18 @@ li {
   color: #FFF;
 }
 
+.category_btn_b {
+  font-size: 12px;
+  border-radius: 5px;
+  padding: 0 5px;
+  border: none;
+  background: #999;
+  color: #FFF;
+  display: block;
+  -webkit-tap-highlight-color: transparent;
+  margin-bottom: 5px;
+}
+
 .sub_btn {
   display: block;
 }

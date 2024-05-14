@@ -10,6 +10,11 @@
       <p><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->post_title }}</a></p>
       <div class="post_bottom_area d-flex">
         <div class="d-flex post_status">
+
+        <input type="submit" name="like_posts" class="category_btn_b" >
+
+
+
           <div class="mr-5">
             <i class="fa fa-comment"></i><span class="">{{ $post->postComments->count() }}</span>
           </div>
@@ -39,19 +44,16 @@
       <div class="sub_btn">
           <ul>
             @foreach($categories as $category)
-            <li class="main_categories" category_id="{{ $category->id }}"><span>{{ $category->main_category }}<span></li>
+              <li class="main_categories" category_id="{{ $category->id }}"><span>{{ $category->main_category }}<span></li>
+              @foreach($category->subcategories as $subcategory)
+              <li class="sub_categories" category_id="{{ $subcategory->id }}"><span>{{ $subcategory->sub_category }}<span></li>
+              @endforeach
+
+              @foreach($category->subcategories as $subcategory)
+              <input type="submit" name="like_posts" class="category_btn_b" value="{{ $subcategory->sub_category }}" form="postSearchRequest">
+              @endforeach
+
             @endforeach
-            <input type="submit" name="like_posts" class="category_btn" value="国語" form="postSearchRequest">
-            <input type="submit" name="like_posts" class="category_btn" value="数学" form="postSearchRequest">
-            <input type="submit" name="like_posts" class="category_btn" value="英語" form="postSearchRequest">
-          </ul>
-          <ul>
-            @foreach($categories as $category)
-            <li class="sub_categories" category_id="{{ $category->id }}"><span>{{ $category->sub_category }}<span></li>
-            @endforeach
-            <input type="submit" name="like_posts" class="category_btn" value="国語" form="postSearchRequest">
-            <input type="submit" name="like_posts" class="category_btn" value="数学" form="postSearchRequest">
-            <input type="submit" name="like_posts" class="category_btn" value="英語" form="postSearchRequest">
           </ul>
       </div>
     </div>
