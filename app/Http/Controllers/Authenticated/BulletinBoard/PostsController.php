@@ -21,8 +21,10 @@ class PostsController extends Controller
         $like = new Like;
         $post_comment = new Post;
 
+        $user = Auth::user();
+
         foreach($posts as $post){
-            $post->like_count = $post->likes->count(); // いいね数をカウントしてpostに追加
+        $post->like_count = $post->likes->count(); // いいね数をカウントしてpostに追加
         }
 
         if(!empty($request->keyword)){
@@ -40,7 +42,7 @@ class PostsController extends Controller
             $posts = Post::with('user', 'postComments')
             ->where('user_id', Auth::id())->get();
         }
-        return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment'));
+        return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment', 'user'));
     }
 
     public function postDetail($post_id){
@@ -58,7 +60,7 @@ class PostsController extends Controller
             'user_id' => Auth::id(),
             'post_title' => $request->post_title,
             'post' => $request->post_body,
-            'sub_category_id' => $request->post_category_id, // サブカテゴリーIDを保存
+            'sub_category_id' => $request->sub_category_id, // サブカテゴリーIDを保存
         ]);
         return redirect()->route('post.show');
     }
@@ -145,5 +147,11 @@ class PostsController extends Controller
              $post->like_count = $post->likes->count(); // いいね数を再度更新
 
              return response()->json();
+    }
+
+    public function userProfile($id){
+        $user = User::with('subjects')->findOrFail($id);
+        $subject_lists = Subjects::all();
+        return view('authenticated.users.profile', compact('user', 'subject_lists'));
     }
 }

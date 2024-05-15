@@ -11,7 +11,11 @@
       <div class="post_bottom_area d-flex">
         <div class="d-flex post_status">
 
-        <input type="submit" name="like_posts" class="category_btn_b" >
+
+
+            <input type="submit" name="like_posts" class="category_btn" >
+
+
 
 
 

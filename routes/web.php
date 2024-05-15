@@ -54,6 +54,7 @@ Route::group(['middleware' => 'auth','can:admin'], function(){
             Route::post('/comment/create', 'PostsController@commentCreate')->name('comment.create');
             Route::post('/like/post/{id}', 'PostsController@postLike')->name('post.like');
             Route::post('/unlike/post/{id}', 'PostsController@postUnLike')->name('post.unlike');
+            Route::get('/user/profile/{id}', 'PostsController@userProfile')->name('user.profile');
         });
         Route::namespace('Users')->group(function(){
             Route::get('/show/users', 'UsersController@showUsers')->name('user.show');
