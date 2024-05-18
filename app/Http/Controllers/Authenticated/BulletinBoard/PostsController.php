@@ -9,7 +9,6 @@ use App\Models\Categories\SubCategory;
 use App\Models\Posts\Post;
 use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
-// use App\Models\Posts\SubCategory;
 use App\Models\Categories\SubCategory as CategorySubCategory;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
@@ -18,8 +17,9 @@ use Auth;
 class PostsController extends Controller
 {
     public function show(Request $request){
-        $posts = Post::with('user', 'postComments','likes')->get();
+        $posts = Post::with('user', 'postComments','likes','subCategories')->get();
         $categories = MainCategory::get();
+        $sub_categories = SubCategory::get();
         $like = new Like;
         $post_comment = new Post;
 
@@ -28,11 +28,21 @@ class PostsController extends Controller
         foreach($posts as $post){
         $post->like_count = $post->likes->count(); // いいね数をカウントしてpostに追加
         }
-
         if(!empty($request->keyword)){
             $posts = Post::with('user', 'postComments')
             ->where('post_title', 'like', '%'.$request->keyword.'%')
-            ->orWhere('post', 'like', '%'.$request->keyword.'%')->get();
+            ->orWhere('post', 'like', '%'.$request->keyword.'%')
+            ->orWhereHas('subCategories', function($query) use ($request){
+            $query->where('sub_category', $request->keyword);
+            })
+            ->get();
+            } else if($request->category_word){
+            $sub_category = $request->category_word;
+            $posts = Post::with('user', 'postComments')
+            ->whereHas('subCategories', function($query) use ($sub_category){
+            $query->where('sub_category', $sub_category);
+            })
+            ->get();
         }else if($request->category_word){
             $sub_category = $request->category_word;
             $posts = Post::with('user', 'postComments')->get();
@@ -43,6 +53,14 @@ class PostsController extends Controller
         }else if($request->my_posts){
             $posts = Post::with('user', 'postComments')
             ->where('user_id', Auth::id())->get();
+        }else if($request->has('sub_categories')){
+        $sub_category_name = $request->sub_categories;
+        $sub_category_ids = CategorySubCategory::where('sub_category', $sub_category_name)->pluck('id')->toArray();
+        $posts = Post::with('user', 'postComments')
+        ->whereHas('subCategories', function($query) use ($sub_category_ids){
+        $query->whereIn('sub_categories.id',$sub_category_ids);
+        })
+        ->get();
         }
         return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment', 'user'));
     }
@@ -76,19 +94,8 @@ class PostsController extends Controller
         Post::where('id', $request->post_id)->update([
             'post_title' => $request->post_title,
             'post' => $request->post_body,
-
         ]);
-
-        // SubCategory::where('id', $request->sub_category_id)->update([
-            // 'sub_category' => $request->sub_category,
-        // ]);
-
-        // return redirect()->route('post.detail', ['id' => $request->post_id]);
-
-        // $request = SubCategory::findOrFail($request->sub_category_id);
-        // $request->sub_categories()->sync($request->sub_category);
          return redirect()->route('post.detail', ['id' => $request->sub_category_id]);
-
     }
 
     public function postDelete($id){

@@ -10,11 +10,10 @@
 
       <p><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->post_title }}</a></p>
 
-      <!-- 投稿したカテゴリーボタンの表示 （エラー起きないように、とりあえず）-->
+      <!-- 投稿したカテゴリーボタンの表示・サブカテゴリー検索で表示-->
       @foreach($post->subCategories as $subcategory)
-      <span class="category_btn_b">{{ $subcategory->sub_category }}</span>
+      <span class="category_btn_b" name="sub">{{ $subcategory->sub_category }}</span>
       @endforeach
-
 
       <div class="post_bottom_area d-flex">
         <div class="d-flex post_status">
@@ -51,9 +50,9 @@
               @foreach($category->subcategories as $subcategory)
               <li class="sub_categories" category_id="{{ $subcategory->id }}"><span>{{ $subcategory->sub_category }}<span></li>
               @endforeach
-
+              <!-- サブカテゴリーでの検索 -->
               @foreach($category->subcategories as $subcategory)
-              <input type="submit" name="like_posts" class="category_btn_b" value="{{ $subcategory->sub_category }}" form="postSearchRequest">
+              <input type="submit" name="sub_categories" class="category_btn_b" value="{{ $subcategory->sub_category }}" form="postSearchRequest">
               @endforeach
 
             @endforeach
