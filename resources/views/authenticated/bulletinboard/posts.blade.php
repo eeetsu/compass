@@ -7,18 +7,17 @@
     @foreach($posts as $post)
     <div class="post_area border w-75 m-auto p-3">
       <p><span>{{ $post->user->over_name }}</span><span class="ml-3">{{ $post->user->under_name }}</span>さん</p>
+
       <p><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->post_title }}</a></p>
+
+      <!-- 投稿したカテゴリーボタンの表示 （エラー起きないように、とりあえず）-->
+      @foreach($post->subCategories as $subcategory)
+      <span class="category_btn_b">{{ $subcategory->sub_category }}</span>
+      @endforeach
+
+
       <div class="post_bottom_area d-flex">
         <div class="d-flex post_status">
-
-
-
-            <input type="submit" name="like_posts" class="category_btn" >
-
-
-
-
-
           <div class="mr-5">
             <i class="fa fa-comment"></i><span class="">{{ $post->postComments->count() }}</span>
           </div>

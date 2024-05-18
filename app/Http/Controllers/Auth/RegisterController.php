@@ -88,9 +88,9 @@ class RegisterController extends Controller
                 ]);
 
                 // ユーザーが選択した科目の処理を追加
-                if ($request->filled('subject')) {
+                // if ($request->filled('subject')) {
                 $user->subjects()->attach($request->subject);
-                }
+                // }
 
                 DB::commit();
                 return view('auth.login.login');

@@ -5,6 +5,9 @@
   <div class="post_create_area border w-50 m-5 p-5">
     <div class="">
       <!-- 投稿カテゴリー欄 -->
+      @if($errors->first('post_category_id'))
+      <span class="error_message">{{ $errors->first('post_category_id') }}</span>
+      @endif
       <p class="mb-0">カテゴリー</p>
       <select class="w-100" form="postCreate" name="sub_category_id">
         <option value>----</option>
@@ -53,9 +56,12 @@
         @error('sub_category_name')
         <span class="error_message">{{ $message }}</span>
         @enderror
+        @error('main_category_id')
+        <span class="error_message">{{ $message }}</span>
+        @enderror
         <p class="m-0">サブカテゴリー</p>
           <select class="w-100" name="main_category_id" form="subCategoryRequest">
-            <option value>----</option>
+            <option value="100">----</option>
             @foreach($main_categories as $main_category)
             <option value="{{ $main_category->id }}">{{ $main_category->main_category }}</option>
             @endforeach

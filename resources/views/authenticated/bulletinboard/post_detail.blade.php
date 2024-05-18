@@ -15,6 +15,11 @@
           </div>
         </div>
 
+        <!-- 投稿したカテゴリーボタンの表示 （エラー起きないように、とりあえず）-->
+      @foreach($post->subCategories as $subcategory)
+      <span class="category_btn_b">{{ $subcategory->sub_category }}</span>
+      @endforeach
+
         <div class="contributor d-flex">
           <p>
             <span>{{ $post->user->over_name }}</span>

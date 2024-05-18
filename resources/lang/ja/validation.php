@@ -157,6 +157,7 @@ return [
 'password' => 'パスワード',
 // 'password_confirmation' => '確認用パスワード',
 'main_category_name' => 'メインカテゴリー',
+'main_category_id' => 'メインカテゴリー',
 'sub_category_name' => 'サブカテゴリー',
 ],
 

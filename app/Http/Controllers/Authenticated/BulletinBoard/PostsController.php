@@ -9,6 +9,8 @@ use App\Models\Categories\SubCategory;
 use App\Models\Posts\Post;
 use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
+// use App\Models\Posts\SubCategory;
+use App\Models\Categories\SubCategory as CategorySubCategory;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
 use Auth;
@@ -46,8 +48,10 @@ class PostsController extends Controller
     }
 
     public function postDetail($post_id){
-        $post = Post::with('user', 'postComments')->findOrFail($post_id);
-        return view('authenticated.bulletinboard.post_detail', compact('post'));
+        $post = Post::with('user', 'postComments', 'subCategories')->findOrFail($post_id);
+        $sub_category = $post->subCategories->first(); // 最初のサブカテゴリーを取得
+        return view('authenticated.bulletinboard.post_detail', compact('post', 'sub_category'));
+
     }
 
     public function postInput(){
@@ -60,8 +64,11 @@ class PostsController extends Controller
             'user_id' => Auth::id(),
             'post_title' => $request->post_title,
             'post' => $request->post_body,
-            'sub_category_id' => $request->sub_category_id, // サブカテゴリーIDを保存
         ]);
+
+        $post->subCategories()->attach($request->sub_category_id);
+
+        // サブカテゴリーとの関連付け
         return redirect()->route('post.show');
     }
 
@@ -69,8 +76,19 @@ class PostsController extends Controller
         Post::where('id', $request->post_id)->update([
             'post_title' => $request->post_title,
             'post' => $request->post_body,
+
         ]);
-        return redirect()->route('post.detail', ['id' => $request->post_id]);
+
+        // SubCategory::where('id', $request->sub_category_id)->update([
+            // 'sub_category' => $request->sub_category,
+        // ]);
+
+        // return redirect()->route('post.detail', ['id' => $request->post_id]);
+
+        // $request = SubCategory::findOrFail($request->sub_category_id);
+        // $request->sub_categories()->sync($request->sub_category);
+         return redirect()->route('post.detail', ['id' => $request->sub_category_id]);
+
     }
 
     public function postDelete($id){
@@ -88,6 +106,7 @@ class PostsController extends Controller
     public function subCategoryCreate(Request $request){
         $validatedData = $request->validate([
             'sub_category_name' => 'required|string|max:255|unique:sub_categories,sub_category',
+            'main_category_id' => 'required|exists:sub_categories,id',
             ]);
         SubCategory::create(['sub_category' => $request->sub_category_name,
         'main_category_id' => $request->main_category_id]);
