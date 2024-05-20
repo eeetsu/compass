@@ -2,6 +2,8 @@
 namespace App\Calendars\General;
 
 use Carbon\Carbon;
+use Auth;
+
 
 class CalendarWeek{
   protected $carbon;
