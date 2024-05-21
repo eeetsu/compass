@@ -40,16 +40,17 @@ class CalendarView{
       foreach($days as $day){
         $startDay = $this->carbon->format("Y-m-01");
         $toDay = $this->carbon->format("Y-m-d");
-        $pastDay = $this->carbon->isPast() ? '受付終了' : '';
+        // $pastDay = $this->carbon->isPast() ? '受付終了' : '';
 
-        if($day instanceof CalendarWeek){
-        $partCounts = $day->dayPartCounts($day->getDay());
-        } else {
-        $partCounts = '未参加';
-        }
+         if($day instanceof CalendarWeek){
+         $partCounts = $day->dayPartCounts($day->getDay());
+         } else {
+         $partCounts = '';
+         }
 
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
           $html[] = '<td class="past-day border">';
+          $html[] = '<p class="day">' . $this->carbon->format(""). ' 受付終了</p>';
         }else{
           $html[] = '<td class="border '.$day->getClassName().'">';
         }
