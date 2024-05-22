@@ -70,7 +70,7 @@ foreach($days as $day){
   }else{  //（大枠）過去日の場合
     if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
        $html[] = '<p class="day">' . $this->carbon->format(""). ' 受付終了</p>';
-        $html[] = '<p>予約：' . $reserveDate->users->name . '</p>';
+        // $html[] = '<p>予約：' . $reserveDate->users->name . '</p>';
 
     }else{ //未来日の場合
 
