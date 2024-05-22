@@ -45,33 +45,40 @@ foreach($days as $day){
 
   if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
     $html[] = '<td class="past-day border">';
-    $html[] = '<p class="day">' . $this->carbon->format(""). ' 受付終了</p>';
   }else{
     $html[] = '<td class="border '.$day->getClassName().'">';
 
   }
-    $html[] = $day->render();
+  $html[] = $day->render();
 
-  if(in_array($day->everyDay(), $day->authReserveDay())){
+  if(in_array($day->everyDay(), $day->authReserveDay())){  //（大枠）未来日の場合
     $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
-  if($reservePart == 1){
-    $reservePart = "リモ1部";
-  }else if($reservePart == 2){
-    $reservePart = "リモ2部";
-  }else if($reservePart == 3){
-    $reservePart = "リモ3部";
+    if($reservePart == 1){
+      $reservePart = "リモ1部";
+    }else if($reservePart == 2){
+      $reservePart = "リモ2部";
+    }else if($reservePart == 3){
+      $reservePart = "リモ3部";
+    }
+    if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){  //（中身）日付の部分
+      $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
+      $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+    }else{ //白部分
+      $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
+      $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+    }
+  }else{  //（大枠）過去日の場合
+    if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+       $html[] = '<p class="day">' . $this->carbon->format(""). ' 受付終了</p>';
+        $html[] = '<p>予約：' . $reserveDate->users->name . '</p>';
+
+    }else{ //未来日の場合
+
+      $html[] = $day->selectPart($day->everyDay());
+    }
   }
-  if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-    $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
-    $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
-  }else{
-    $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
-    $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
-  }
-  }else{
-    $html[] = $day->selectPart($day->everyDay());
-  }
-    $html[] = $day->getDate();
+
+  $html[] = $day->getDate();
     $html[] = '</td>';
   }
     $html[] = '</tr>';
@@ -86,17 +93,17 @@ foreach($days as $day){
 }
 
 protected function getWeeks(){
-$weeks = [];
-$firstDay = $this->carbon->copy()->firstOfMonth();
-$lastDay = $this->carbon->copy()->lastOfMonth();
-$week = new CalendarWeek($firstDay->copy());
-$weeks[] = $week;
-$tmpDay = $firstDay->copy()->addDay(7)->startOfWeek();
-while($tmpDay->lte($lastDay)){
-$week = new CalendarWeek($tmpDay, count($weeks));
-$weeks[] = $week;
-$tmpDay->addDay(7);
-}
-return $weeks;
-}
+  $weeks = [];
+  $firstDay = $this->carbon->copy()->firstOfMonth();
+  $lastDay = $this->carbon->copy()->lastOfMonth();
+  $week = new CalendarWeek($firstDay->copy());
+  $weeks[] = $week;
+  $tmpDay = $firstDay->copy()->addDay(7)->startOfWeek();
+  while($tmpDay->lte($lastDay)){
+  $week = new CalendarWeek($tmpDay, count($weeks));
+  $weeks[] = $week;
+  $tmpDay->addDay(7);
+  }
+  return $weeks;
+  }
 }
