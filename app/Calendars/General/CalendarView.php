@@ -50,8 +50,8 @@ foreach($days as $day){
 
   }
   $html[] = $day->render();
-
-  if(in_array($day->everyDay(), $day->authReserveDay())){  //（大枠）未来日の場合
+  //（大枠）毎日の中で、ログインユーザーが予約する日付（予約選択まだしてない場合）
+  if(in_array($day->everyDay(), $day->authReserveDay())){
     $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
     if($reservePart == 1){
       $reservePart = "リモ1部";
@@ -60,22 +60,34 @@ foreach($days as $day){
     }else if($reservePart == 3){
       $reservePart = "リモ3部";
     }
-    if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){  //（中身）日付の部分
+    if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){   //月初〜毎日の中　かつ　今日〜毎日（未来or過去）である場合
+      //（中身1の条件）予約選択した場合
       $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
       $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
-    }else{ //白部分
+    }else{
+      //（中身1の条件）予約選択してない場合
       $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
       $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
-    }
-  }else{  //（大枠）過去日の場合
-    if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-       $html[] = '<p class="day">' . $this->carbon->format(""). ' 受付終了</p>';
-        // $html[] = '<p>予約：' . $reserveDate->users->name . '</p>';
+      }
+      }else{
+      //（中身2の条件）予約選択してない場合
+      if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+        $html[] = '<p class="day">' . $this->carbon->format(""). ' 受付終了</p>';
 
-    }else{ //未来日の場合
+      //（予約選択しているが未参加の場合、「未参加」と表示する）
+        } else {
+        if($day->selectPart($day->everyDay()) && $toDay >= $day->everyDay()){
+        $html[] = '<p class="day">' . $this->carbon->format(""). ' 未参加</p>';
 
-      $html[] = $day->selectPart($day->everyDay());
-    }
+      //（予約選択していて参加した場合、選択した予約の「$reservePart」を表示する）
+        } else {
+        $html[] = '<p class="day">' . $day->selectPart($day->everyDay()) . '</p>';
+        }
+      }
+
+  //（大枠）毎日の中で、ログインユーザーが予約する日付（予約選択した場合）
+  //}else{
+    //$html[] = $day->selectPart($day->everyDay());
   }
 
   $html[] = $day->getDate();
