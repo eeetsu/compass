@@ -50,6 +50,9 @@ foreach($days as $day){
 
   }
   $html[] = $day->render();
+
+
+
   //（大枠）毎日の中で、ログインユーザーが予約する日付（予約選択まだしてない場合）
   if(in_array($day->everyDay(), $day->authReserveDay())){
     $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
@@ -66,9 +69,28 @@ foreach($days as $day){
       $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
     }else{
       //（中身1の条件）予約選択してない場合
-      $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
-      $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
-      }
+      $html[] = '<button type="button" class="btn btn-danger p-0 w-75 edit-modal-open" data-date="'.$day->everyDay().'" data-part="'.$day->authReserveDate($day->everyDay())->first()->setting_part.'">'.$reservePart.'</button>';
+
+        $html[] = '<div class="modal js-modal" style="display:none">';
+        $html[] = '<div class="modal__bg js-modal-close"></div>';
+        $html[] = '<div class="modal__content">';
+        $html[] = '<div class="w-100">';
+        $html[] = '<p>予約日: <span class="modal-date"></span></p>';
+        $html[] = '<p>時間: <span class="modal-part"></span></p>';
+        $html[] = '<div class="w-50 m-auto edit-modal-btn d-flex">';
+        $html[] = '<a class="js-modal-close btn btn-primary d-inline-block" href="#">閉じる</a>';
+        $html[] = '<input type="submit" class="btn btn-danger d-block" value="キャンセル">';
+        $html[] = '</div>';
+        $html[] = '</div>';
+        $html[] = '<input type="hidden" class="modal-date-input" value="" form="deleteParts">';
+        $html[] = '</div>';
+        $html[] = '</div>';
+
+        $html[] = '</td>';
+
+        $html[] = '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
+        $html[] = '<script src="calendar.js"></script>';
+    }
       }else{
       //（中身2の条件）予約選択してない場合
       if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
