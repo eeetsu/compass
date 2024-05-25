@@ -21,12 +21,8 @@ class CalendarsController extends Controller
     public function reserve(Request $request){  //必要なのは予約のidと、ユーザーのid（中間テーブルreserve_setting_users）
         DB::beginTransaction();
         try{
-            //何部か
             $getPart = $request->getPart;
-            //dd($getPart);
-            //日付
             $getDate = $request->getData;
-            //何部、日付
             $reserveDays = array_filter(array_combine($getDate, $getPart));
             foreach($reserveDays as $key => $value){
                 $reserve_settings = ReserveSettings::where('setting_reserve', $key)->where('setting_part', $value)->first();
@@ -40,28 +36,21 @@ class CalendarsController extends Controller
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
 
+
+
     public function delete(Request $request){
         DB::beginTransaction();
         try{
-            $reserve_id = $request->input('reserve_id');
-            $user_id = Auth::id();
-
-            $reservation = Reservation::where('id', $reserve_id)->whereHas('users', function($query) use ($user_id){
-            $query->where('user_id', $user_id);
-            })->first();
-
-            if($reservation){
-                $reservation->users()->detach($user_id);
-                $reservation->increment('limit_users');
-                }else{
-                    return redirect()->back()->with('error', 'Reservation not found');
-                    }
-                    DB::commit();
-                    }catch(\Exception $e){
-                    DB::rollback();
-                    return redirect()->back()->with('error', 'An error occurred, please try again');
-                    }
-                    return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
+            $reserveId = $request->reserve_id;
+            $reserve = ReserveSettings::find($reserveId);
+            $reserve->increment('limit_users');
+            $reserve->users()->detach(Auth::id());
+            $reserve->delete();
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollback();
+        }
+        return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
 
 }
