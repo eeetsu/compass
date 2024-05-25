@@ -43,7 +43,7 @@ class CalendarsController extends Controller
     public function delete(Request $request){
         DB::beginTransaction();
         try{
-            $reserve_id = $request->reserve_id;
+            $reserve_id = $request->input('reserve_id');
             $user_id = Auth::id();
 
             $reservation = Reservation::where('id', $reserve_id)->whereHas('users', function($query) use ($user_id){
@@ -62,6 +62,6 @@ class CalendarsController extends Controller
                     return redirect()->back()->with('error', 'An error occurred, please try again');
                     }
                     return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
-                    }
+    }
 
-            }
+}

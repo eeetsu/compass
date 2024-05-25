@@ -69,10 +69,8 @@ foreach($days as $day){
               $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px;color: black;" >'. $part .'部参加</p>';
               $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
             }else{
-              $html[] = '<button type="submit" class="edit-modal-open btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" part="'. $part .'" reservePart="'. $reservePart .'" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
-               $html[] = '<input type="hidden" name="getPart[]" value=".$day->authReserveDate($day->everyDay())->first()->setting_reserve." form="deleteParts" " onclick="return confirm(\'この日付を削除します。よろしいでしょうか？\')">';
-
-              // $html[] = '<input type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'.$day->authReserveDate($day->everyDay())->first()->setting_reserve.'" form="deleteParts" onclick="return confirm(\'この日付を削除します。よろしいでしょうか？\')">削除</い>';
+              $html[] = '<button type="submit" class="edit-modal-open btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" part="'. $part .'" reservePart="'. $reservePart .'" value=delete"'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
+              $html[] = '<input type="hidden" name="getPart[]" value="" form="deleteParts">';
 
               $html[] = '<input type="hidden" name="getPart[]"  form="reserveParts">';
             }
