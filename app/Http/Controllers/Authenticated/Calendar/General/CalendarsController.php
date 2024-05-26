@@ -38,19 +38,25 @@ class CalendarsController extends Controller
 
 
 
-    public function delete(Request $request){
-        DB::beginTransaction();
-        try{
-            $reserveId = $request->reserve_id;
-            $reserve = ReserveSettings::find($reserveId);
-            $reserve->increment('limit_users');
-            $reserve->users()->detach(Auth::id());
-            $reserve->delete();
-            DB::commit();
-        }catch(\Exception $e){
-            DB::rollback();
-        }
-        return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
-    }
+   public function delete(Request $request){
+        // モーダルでキャンセルが選択された場合の処理
 
+        DB::beginTransaction();
+        try {
+        // リクエストから予約設定IDを取得
+        $reserve_setting_id = $request->reserve_setting_id;
+
+        // 指定された予約を削除
+        $reserve = ReserveSettings::findOrFail($reserve_setting_id);
+        $reserve->delete();
+
+        DB::commit(); // トランザクションをコミット
+
+        } catch(\Exception $e) {
+        DB::rollback(); // エラーが発生した場合はトランザクションをロールバック
+        }
+
+        // ユーザーIDを取得し、予約一覧ページにリダイレクト
+        return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
+        }
 }

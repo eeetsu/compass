@@ -23,16 +23,14 @@
           <p>時間: <span class="modal-part"></span></p>
             <div class="w-50 m-auto edit-modal-btn d-flex">
               <a class="js-modal-close btn btn-primary d-inline-block" href="#">閉じる</a>
-                <form action="/delete/calendar" method="post" id="deleteParts">
-                  <input type="hidden" class="modal-date-input" name="reserve_id" value="" form="deleteParts">
-                  <button type="submit" class="btn btn-danger d-block">キャンセル</button>
-                </form>
+                <input type="submit" class="btn btn-danger d-block" value="キャンセル">
             </div>
         </div>
+        <input type="hidden" class="modal-date-input" value="" form="deleteParts">
       </div>
     </div>
   </div>
-        </td>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="calendar.js"></script>
+</td>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="calendar.js"></script>'
 @endsection
