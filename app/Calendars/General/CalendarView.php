@@ -69,20 +69,28 @@ foreach($days as $day){
 
           if($day->everyDay()){
             if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+              //過去（予約した〇〇部参加の表示）
               $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px;color: black;" >'. $part .'部参加</p>';
               $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
             }else{
+              //未来（予約するボタンの設置、参加する部　　予約したのをキャンセルするボタンの設定）
+              //予約ボタンの設定
               $html[] = '<button type="submit" class="js-modal-open btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" part="'. $part .'" reservePart="'. $reservePart .'" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
-              $html[] = '<input type="hidden" name="getPart[]" value="" form="deleteParts">';
-              // $html[] = '<form action="/delete/calendar" method="post" id="deleteParts">'.csrf_field().'</form>';
+              //削除ボタンの設定
+              //$html[] = '<input type="hidden" name="getPart[]" value="" form="deleteParts">';
+              //（追加してみた箇所）
+              $html[] = '<input type="hidden" name="setting_reserve" class="date" form="deleteParts">';
+              $html[] = '<input type="hidden" name="setting_part" class="part" form="deleteParts">';
             }
-              }
-            }else{
-              if($day->everyDay()){
-                if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-                  $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px;color: black;" >受付終了</p>';
-                  $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+          }
+        }else{
+          if($day->everyDay()){
+            if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+              //過去
+              $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px;color: black;" >受付終了</p>';
+              // $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
                 }else{
+                  //未来
                   // Calendar WeekDayファイルのfunction selectPartの中身
                   $html[] = $day->selectPart($day->everyDay());
             }

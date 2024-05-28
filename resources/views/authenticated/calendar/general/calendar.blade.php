@@ -21,14 +21,18 @@
         <div class="w-100">
           <p>予約日: <span class="modal-date"></span></p>
           <p>時間: <span class="modal-part"></span></p>
+          <!-- 追加箇所 （routeの設定）-->
+
+
             <div class="w-50 m-auto edit-modal-btn d-flex">
               <a class="js-modal-close btn btn-primary d-inline-block" href="#">閉じる</a>
-                <input type="submit" class="btn btn-danger d-block" href="/delete/calendar" value="キャンセル">
+              <!-- キャンセルの実装 -->
+                 <input type="submit" class="btn btn-danger d-block" href="/delete/calendar" value="キャンセル" form="deleteParts">
             </div>
         </div>
       </div>
-      <input type="submit" class="btn btn-danger d-block" form="deleteParts">
-    </div>
+      <input type="hidden" name="setting_reserve" class="date" form="deleteParts">
+      <input type="hidden" name="setting_part" class="part" form="deleteParts">
   </div>
 </td>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

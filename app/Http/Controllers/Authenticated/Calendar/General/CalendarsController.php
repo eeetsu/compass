@@ -40,10 +40,16 @@ class CalendarsController extends Controller
 
    public function delete(Request $request){
         // モーダルでキャンセルが選択された場合の処理
+        $user = Auth::user();
+        $reserve_setting_id = $request->input('setting_reserve');
+        dd($reserve_setting_id);
+        $date = $request->input('date');
+        $part = $request->input('part');
 
-        dd($request);
+        //dd($request);
         DB::beginTransaction();
         try {
+
         // リクエストから予約設定IDを取得
         $reserve_setting_id = $request->reserve_setting_id;
 

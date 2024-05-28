@@ -7,9 +7,12 @@ $(function () {
     var value = $(this).attr('value'); //setting_reserve
     var reservepart = $(this).attr('reservepart');  //setting_part
 
+    //表示用
     $('.modal-date').text(value);
     $('.modal-part').text(reservepart);
+    //データを送るため用
     $('.modal-date-input').val(date);
+    $('.modal-date-input').val(part);
     return false;
   });
   $('.js-modal-close').on('click', function () {
