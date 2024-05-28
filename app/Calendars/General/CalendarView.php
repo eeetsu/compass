@@ -52,6 +52,8 @@ foreach($days as $day){
   $html[] = $day->render();
 
 
+
+  // ①
   if(in_array($day->everyDay(), $day->authReserveDay())){
           $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
           if($reservePart == 1){
@@ -72,16 +74,17 @@ foreach($days as $day){
             }else{
               $html[] = '<button type="submit" class="js-modal-open btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" part="'. $part .'" reservePart="'. $reservePart .'" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
               $html[] = '<input type="hidden" name="getPart[]" value="" form="deleteParts">';
+              // $html[] = '<form action="/delete/calendar" method="post" id="deleteParts">'.csrf_field().'</form>';
             }
-          }
-        }else{
-          if($day->everyDay()){
-            if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-              $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px;color: black;" >受付終了</p>';
-              $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+              }
             }else{
-            // Calendar WeekDayファイルのfunction selectPartの中身
-              $html[] = $day->selectPart($day->everyDay());
+              if($day->everyDay()){
+                if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+                  $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px;color: black;" >受付終了</p>';
+                  $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+                }else{
+                  // Calendar WeekDayファイルのfunction selectPartの中身
+                  $html[] = $day->selectPart($day->everyDay());
             }
           }
         }

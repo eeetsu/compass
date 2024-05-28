@@ -47,6 +47,14 @@ class CalendarView{
          $partCounts = '';
          }
 
+
+
+
+
+
+
+
+
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
           $html[] = '<td class="past-day border">';
 

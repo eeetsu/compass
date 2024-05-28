@@ -23,11 +23,11 @@
           <p>時間: <span class="modal-part"></span></p>
             <div class="w-50 m-auto edit-modal-btn d-flex">
               <a class="js-modal-close btn btn-primary d-inline-block" href="#">閉じる</a>
-                <input type="submit" class="btn btn-danger d-block" value="キャンセル">
+                <input type="submit" class="btn btn-danger d-block" href="/delete/calendar" value="キャンセル">
             </div>
         </div>
-        <input type="hidden" class="modal-date-input" value="" form="deleteParts">
       </div>
+      <input type="submit" class="btn btn-danger d-block" form="deleteParts">
     </div>
   </div>
 </td>
