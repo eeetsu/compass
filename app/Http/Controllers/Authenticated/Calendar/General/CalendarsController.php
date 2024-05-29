@@ -23,7 +23,7 @@ class CalendarsController extends Controller
         try{
             $getPart = $request->getPart;
             $getDate = $request->getData;
-            //予約を複数まとめて取ることができる（削除には必要ない　１つづつなので）
+            //予約を複数まとめて取ることができる（削除には必要ない　１つずつなので）
             $reserveDays = array_filter(array_combine($getDate, $getPart));
             foreach($reserveDays as $key => $value){
                 //いつの予約か、〇〇部か
