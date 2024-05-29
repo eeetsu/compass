@@ -31,8 +31,8 @@
             </div>
         </div>
       </div>
-      <input type="hidden" name="setting_reserve" class="date" form="deleteParts">
-      <input type="hidden" name="setting_part" class="part" form="deleteParts">
+      <input type="hidden" name="setting_reserve" class="setting_reserve" form="deleteParts">
+      <input type="hidden" name="setting_part" class="setting_part" form="deleteParts">
   </div>
 </td>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
