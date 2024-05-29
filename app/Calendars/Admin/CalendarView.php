@@ -48,13 +48,6 @@ class CalendarView{
          }
 
 
-
-
-
-
-
-
-
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
           $html[] = '<td class="past-day border">';
 
@@ -66,6 +59,26 @@ class CalendarView{
               }
         }
         $html[] = $day->render();
+
+
+        $html[] = '<div class="adjust-area">';
+        if($day->everyDay()){
+          if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">1部</a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">2部</a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">3部</a>';
+          }else{
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">1部</a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">2部</a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">3部</a>';
+          }
+        }
+
+
+
+
+
+
         $html[] = $partCounts;
         $html[] = '</td>';
       }
