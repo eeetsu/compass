@@ -60,7 +60,7 @@ class CalendarView{
 
         }else{
           if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-            $html[] = '<p class="day">' . $this->carbon->format(""). ' 受付終了</p>';
+            $html[] = '<p class="day">';
             }else{
               $html[] = '<td class="border '.$day->getClassName().'">';
               }
