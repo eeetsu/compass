@@ -18,7 +18,12 @@ class CalendarsController extends Controller
 {
     public function show(){
         $calendar = new CalendarView(time());
-        return view('authenticated.calendar.admin.calendar', compact('calendar'));
+
+        // 予約者数を取得する
+        $reserveCounts = ReserveSettings::where('setting_reserve', date('Y-m-d'))->sum('limit_users');
+        //dd($reserveCounts);
+
+        return view('authenticated.calendar.admin.calendar', compact('calendar', 'reserveCounts'));
     }
 
 

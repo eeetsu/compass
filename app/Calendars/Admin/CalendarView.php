@@ -14,6 +14,11 @@ class CalendarView{
     return $this->carbon->format('Y年n月');
   }
 
+  public function getCarbonInstance(){
+    return $this->carbon;
+  }
+
+
   public function render(){
     $html = [];
     $html[] = '<div class="calendar text-center">';
@@ -42,8 +47,10 @@ class CalendarView{
         $toDay = $this->carbon->format("Y-m-d");
 
          if($day instanceof CalendarWeek){
+         $reserveCounts = ReserveSettings::where('setting_reserve', $day->getDetailDate())->sum('limit_users');
          $partCounts = $day->dayPartCounts($day->getDay());
          } else {
+         $reserveCounts = '';
          $partCounts = '';
          }
 
@@ -64,16 +71,17 @@ class CalendarView{
         $html[] = '<div class="adjust-area">';
         if($day->everyDay()){
           if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">1部</a>';
-            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">2部</a>';
-            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">3部</a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">1部'  . $reserveCounts . '</a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">2部'  . $reserveCounts . '</a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">3部'  . $reserveCounts . '</a>';
           }else{
-            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">1部</a>';
-            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">2部</a>';
-            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">3部</a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">1部'  . $reserveCounts . '</a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">2部'  . $reserveCounts . '</a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">3部'  . $reserveCounts . '</a>';
           }
         }
 
+        // (' . $reserveCounts . '人)
 
 
 

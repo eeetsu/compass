@@ -22,7 +22,14 @@ class CalendarsController extends Controller
         DB::beginTransaction();
         try{
             $getPart = $request->getPart;
+            //dd($getPart);
             $getDate = $request->getData;
+            $part = $request->part;
+
+             // レングス取得
+            $maxLength = max(count($getPart), count($getDate));
+            $getPart = array_pad($getPart, $maxLength, null);
+
             //予約を複数まとめて取ることができる（削除には必要ない　１つずつなので）
             $reserveDays = array_filter(array_combine($getDate, $getPart));
             foreach($reserveDays as $key => $value){

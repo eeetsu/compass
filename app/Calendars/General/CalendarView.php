@@ -75,12 +75,9 @@ foreach($days as $day){
             }else{
               //未来（予約するボタンの設置、参加する部　　予約したのをキャンセルするボタンの設定）
               //予約ボタンの設定
-              $html[] = '<button type="submit" class="js-modal-open btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" part="'. $part .'" reservePart="'. $reservePart .'" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
-              //削除ボタンの設定
-              //$html[] = '<input type="hidden" name="getPart[]" value="" form="deleteParts">';
-              //（追加してみた箇所）
-              $html[] = '<input type="hidden" name="setting_reserve" class="date" form="deleteParts">';
-              $html[] = '<input type="hidden" name="setting_part" class="part" form="deleteParts">';
+             $html[] = '<button type="submit" class="js-modal-open btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" part="'. $part .'" reservePart="'. $reservePart .'" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
+              $html[] = '<input type="hidden" name="getPart[]" value="" form="deleteParts">';
+              $html[] = '<input type="hidden" name="getPart[]"  form="reserveParts">';
             }
           }
         }else{
@@ -88,7 +85,7 @@ foreach($days as $day){
             if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
               //過去
               $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px;color: black;" >受付終了</p>';
-              // $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+               $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
                 }else{
                   //未来
                   // Calendar WeekDayファイルのfunction selectPartの中身
