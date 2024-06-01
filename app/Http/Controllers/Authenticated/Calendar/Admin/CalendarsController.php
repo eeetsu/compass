@@ -20,10 +20,16 @@ class CalendarsController extends Controller
         $calendar = new CalendarView(time());
 
         // 予約者数を取得する
-        $reserveCounts = ReserveSettings::where('setting_reserve', date('Y-m-d'))->sum('limit_users');
-        //dd($reserveCounts);
+        $one_part_count = ReserveSettings::where('setting_reserve', date('Y-m-d'))->where('setting_part', '1')->with('users')->count();
+        //dd($one_part_count);
+        $two_part_count = ReserveSettings::where('setting_reserve', date('Y-m-d'))->where('setting_part', '2')->with('users')->count();
+        $three_part_count = ReserveSettings::where('setting_reserve', date('Y-m-d'))->where('setting_part', '3')->with('users')->count();
 
-        return view('authenticated.calendar.admin.calendar', compact('calendar', 'reserveCounts'));
+        //$one_part_count = ReserveSettings::where('setting_reserve', $date)->where('setting_part', '1')->with('users')->count();
+        //$two_part_count = ReserveSettings::where('setting_reserve', $date)->where('setting_part', '2')->with('users')->count();
+        //$three_part_count = ReserveSettings::where('setting_reserve', $date)->where('setting_part', '3')->with('users')->count();
+
+        return view('authenticated.calendar.admin.calendar', compact('calendar', 'one_part_count', 'two_part_count', 'three_part_count'));
     }
 
 

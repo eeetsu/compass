@@ -54,7 +54,7 @@ class CalendarView{
          $partCounts = '';
          }
 
-
+         // day部分を修正
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
           $html[] = '<td class="past-day border">';
 
@@ -67,25 +67,30 @@ class CalendarView{
         }
         $html[] = $day->render();
 
+        //$counts = $day->dayPartCounts($day->getDay());
+        //$one_part_count = $counts['one_part_count'];
+        //$two_part_count = $counts['two_part_count'];
+        //$three_part_count = $counts['three_part_count'];
 
+        // 予約者数を表示
         $html[] = '<div class="adjust-area">';
         if($day->everyDay()){
           if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">1部'  . $reserveCounts . '</a>';
-            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">2部'  . $reserveCounts . '</a>';
-            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">3部'  . $reserveCounts . '</a>';
+            $html[] = '<a href="/calendar/' . $day->everyDay() . '/1" class="d-flex m-0 p-0">1部'  . $one_part_count . '</a>';
+            $html[] = '<a href="/calendar/' . $day->everyDay() . '/2" class="d-flex m-0 p-0">2部'  . $two_part_count . '</a>';
+            $html[] = '<a href="/calendar/' . $day->everyDay() . '/3" class="d-flex m-0 p-0">3部'  . $three_part_count . '</a>';
           }else{
-            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">1部'  . $reserveCounts . '</a>';
-            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">2部'  . $reserveCounts . '</a>';
-            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">3部'  . $reserveCounts . '</a>';
+            $html[] = '<a href="/calendar/' . $day->everyDay() . '/1" class="d-flex m-0 p-0">1部'  . $one_part_count . '</a>';
+            $html[] = '<a href="/calendar/' . $day->everyDay() . '/2" class="d-flex m-0 p-0">2部'  . $two_part_count . '</a>';
+            $html[] = '<a href="/calendar/' . $day->everyDay() . '/3" class="d-flex m-0 p-0">3部'  . $three_part_count . '</a>';
           }
         }
 
         // (' . $reserveCounts . '人)
+        // href="/calendar/{date}/{part}" の部分について、{date}が特定の日付を取得できていない
+        // href="/calendar/{date}/{part}" の部分について、{part}が特定の参加する部を取得できていない（１部、２部、３部）
 
-
-
-
+        //<p>{{ count(Auth::user()->followers ?? []) }}名</p>
 
         $html[] = $partCounts;
         $html[] = '</td>';
