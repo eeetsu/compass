@@ -73,16 +73,31 @@ class CalendarView{
         //$three_part_count = $counts['three_part_count'];
 
         // 予約者数を表示
+        //$html[] = '<div class="adjust-area">';
+        //if($day->everyDay()){
+        //  if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+        //    $html[] = '<a href="/calendar/' . $day->everyDay() . '/1" class="d-flex m-0 p-0">1部'  . $one_part_count . '</a>';
+        //    $html[] = '<a href="/calendar/' . $day->everyDay() . '/2" class="d-flex m-0 p-0">2部'  . $two_part_count . '</a>';
+        //    $html[] = '<a href="/calendar/' . $day->everyDay() . '/3" class="d-flex m-0 p-0">3部'  . $three_part_count . '</a>';
+        //  }else{
+        //    $html[] = '<a href="/calendar/' . $day->everyDay() . '/1" class="d-flex m-0 p-0">1部'  . $one_part_count . '</a>';
+        //    $html[] = '<a href="/calendar/' . $day->everyDay() . '/2" class="d-flex m-0 p-0">2部'  . $two_part_count . '</a>';
+        //    $html[] = '<a href="/calendar/' . $day->everyDay() . '/3" class="d-flex m-0 p-0">3部'  . $three_part_count . '</a>';
+        //  }
+        //}
+
+
+        //上記同様（リンクのみの表示）
         $html[] = '<div class="adjust-area">';
         if($day->everyDay()){
           if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-            $html[] = '<a href="/calendar/' . $day->everyDay() . '/1" class="d-flex m-0 p-0">1部'  . $one_part_count . '</a>';
-            $html[] = '<a href="/calendar/' . $day->everyDay() . '/2" class="d-flex m-0 p-0">2部'  . $two_part_count . '</a>';
-            $html[] = '<a href="/calendar/' . $day->everyDay() . '/3" class="d-flex m-0 p-0">3部'  . $three_part_count . '</a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">1部 </a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">2部 </a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">3部 </a>';
           }else{
-            $html[] = '<a href="/calendar/' . $day->everyDay() . '/1" class="d-flex m-0 p-0">1部'  . $one_part_count . '</a>';
-            $html[] = '<a href="/calendar/' . $day->everyDay() . '/2" class="d-flex m-0 p-0">2部'  . $two_part_count . '</a>';
-            $html[] = '<a href="/calendar/' . $day->everyDay() . '/3" class="d-flex m-0 p-0">3部'  . $three_part_count . '</a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">1部 </a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">2部 </a>';
+            $html[] = '<a href="/calendar/{date}/{part}" class="d-flex m-0 p-0">3部 </a>';
           }
         }
 

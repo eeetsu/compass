@@ -63,7 +63,6 @@ class CalendarsController extends Controller
         $getPart = $request->getPart;
         $getDate = $request->getData;
 
-
         //いつの予約か、〇〇部か
         $reserve_settings = ReserveSettings::where('setting_reserve', $date)->where('setting_part', $part)->first(); //setting_reserveはdateから、setting_partはpartからデータを取得
         $reserve_settings->increment('limit_users'); // 上限の設定から増やす処理（削除は増やす処理する）→元に戻す処理
