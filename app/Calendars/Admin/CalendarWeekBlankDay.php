@@ -22,4 +22,8 @@ class CalendarWeekBlankDay extends CalendarWeekDay{
   function dayNumberAdjustment(){
     return '';
   }
+
+  function getDay(){
+    return '';
+  }
 }

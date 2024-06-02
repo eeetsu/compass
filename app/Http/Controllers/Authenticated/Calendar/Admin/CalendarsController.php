@@ -17,45 +17,21 @@ use DB;
 class CalendarsController extends Controller
 {
     public function show(){
+        // 月初と月末の日付を取得
+        $first_day_of_month = date('Y-m-01'); // 当月の1日を取得
+        $last_day_of_month = date('Y-m-t'); // 当月の末日を取得
+
+        // 現在の日時を取得して、CalendarViewオブジェクトを作成する
         $calendar = new CalendarView(time());
 
-        // 予約者数を取得する
-        $one_part_count = ReserveSettings::where('setting_reserve', date('Y-m-d'))->where('setting_part', '1')->with('users')->count();
-        //dd($one_part_count);
-        $two_part_count = ReserveSettings::where('setting_reserve', date('Y-m-d'))->where('setting_part', '2')->with('users')->count();
-        $three_part_count = ReserveSettings::where('setting_reserve', date('Y-m-d'))->where('setting_part', '3')->with('users')->count();
+        // 各部の予約者数を取得する
+        $one_part_count = ReserveSettings::whereBetween('setting_reserve', [$first_day_of_month, $last_day_of_month])->where('setting_part', '1')->with('users')->count();
+        $two_part_count = ReserveSettings::whereBetween('setting_reserve', [$first_day_of_month, $last_day_of_month])->where('setting_part', '2')->with('users')->count();
+        $three_part_count = ReserveSettings::whereBetween('setting_reserve', [$first_day_of_month, $last_day_of_month])->where('setting_part', '3')->with('users')->count();
 
-        //$one_part_count = ReserveSettings::where('setting_reserve', $date)->where('setting_part', '1')->with('users')->count();
-        //$two_part_count = ReserveSettings::where('setting_reserve', $date)->where('setting_part', '2')->with('users')->count();
-        //$three_part_count = ReserveSettings::where('setting_reserve', $date)->where('setting_part', '3')->with('users')->count();
-
+        // calendar.blade.phpビューにデータを渡して表示する
         return view('authenticated.calendar.admin.calendar', compact('calendar', 'one_part_count', 'two_part_count', 'three_part_count'));
     }
-
-
-    //上記showメソッドにてお試しで実装
-    //public function show(Request $request){
-    //    $date = $request->input('setting_reserve');//inputの中はclass名
-    //    $part = $request->input('setting_part');
-
-    //    $calendar = new CalendarView(time());
-
-    //    DB::beginTransaction();
-    //try{
-    //    $getPart = $request->getPart;
-    //    $getDate = $request->getData;
-
-        //いつの予約か、〇〇部か
-    //    $reserve_settings = ReserveSettings::where('setting_reserve', $date)->where('setting_part', $part)->first();
-
-    //    DB::commit();
-    //    }catch(\Exception $e) {
-    //    DB::rollback();
-    //    }
-
-    //    return view('authenticated.calendar.admin.calendar', compact('calendar', 'one_part_count', 'two_part_count', 'three_part_count'));
-        //return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
-    //}
 
 
 
