@@ -15,11 +15,12 @@
 <body>
   <form action="{{ route('loginPost') }}" method="POST">
     <div class="w-100 vh-100 d-flex" style="align-items:center; justify-content:center;">
-      <div class="border vh-50 w-25">
-      <div class="text-center">
+      
+    <div class="login-form ">
+      <div class="atlas-img">
         <img src="image/atlas-black.png" width="150" higtht="25">
         </div>
-        <div>
+        <div class="login-box">
         <div class="w-75 m-auto pt-5">
           <label class="d-block m-0" style="font-size:13px;">メールアドレス</label>
           <div class="border-bottom border-primary w-100">
@@ -39,6 +40,7 @@
           <a href="{{ route('registerView') }}">新規登録はこちら</a>
         </div>
       </div>
+    </div>
       </div>
       {{ csrf_field() }}
     </div>
@@ -48,3 +50,7 @@
   <script src="{{ asset('js/register.js') }}" rel="stylesheet"></script>
 </body>
 </html>
+
+<style>
+body{background-color:#F1F7FE;}
+</style>
