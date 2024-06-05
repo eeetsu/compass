@@ -19,8 +19,20 @@
   <div class="d-flex">
     <div class="sidebar">
       @section('sidebar')
-      <p><a href="{{ route('top.show') }}">トップ</a></p>
+
+
+
+      {!! "<svg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px' fill='#fff'>" !!}
+{!! "<path d='M0 0h24v24H0z' fill='none'></path>" !!}
+{!! "<path d='M17 10H7v2h10v-2zm2-7h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-5-5H7v2h7v-2z'></path>" !!}
+{!! "</svg>" !!}
+<p><a href="{{ route('top.show') }}">マイページ</a></p>
+
+
+     <img src="https://lull-compass.com/image/icon/logout.svg" style="filter: invert(100%); background: transparent;">
       <p><a href="/logout">ログアウト</a></p>
+
+      
       @can('admin')
       <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}">スクール予約</a></p>
       <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}">スクール予約確認</a></p>

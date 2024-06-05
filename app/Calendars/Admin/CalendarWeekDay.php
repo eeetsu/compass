@@ -29,24 +29,31 @@ class CalendarWeekDay{
     $two_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '2')->first();
     $three_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '3')->first();
 
-    // 予約者数を取得する
-    $one_part_count = $one_part ? count($one_part->users) : 0;
-    $two_part_count = $two_part ? count($two_part->users) : 0;
-    $three_part_count = $three_part ? count($three_part->users) : 0;
-
     $html[] = '<div class="text-left">';
-    if($one_part){
-      $html[] = '<p class="day_part m-0 pt-1">1部('.$one_part_count.'人)</p>';
-    }
-    if($two_part){
-      $html[] = '<p class="day_part m-0 pt-1">2部 ('.$two_part_count.'人)</p>';
-    }
-    if($three_part){
-      $html[] = '<p class="day_part m-0 pt-1">3部 ('.$three_part_count.'人)</p>';
-    }
-    $html[] = '</div>';
+      if($one_part){
+        $one_part_count = $one_part->users->count();
+        $html[] = '<div class="d-flex align-items-center">';
+        $html[] = '<a href="/calendar/'.$ymd.'/1" class="m-0 p-0">1部</a>';
+        $html[] = '<p class="m-0">'.$one_part_count.'</p>';
+        $html[] = '</div>';
+      }
+      if($two_part){
+        $two_part_count = $two_part->users->count();
+        $html[] = '<div class="d-flex align-items-center">';
+        $html[] = '<a href="/calendar/'.$ymd.'/2" class="m-0 p-0">2部</a>';
+        $html[] = '<p class="m-0">'.$two_part_count.'</p>';
+        $html[] = '</div>';
+      }
+      if($three_part){
+        $three_part_count = $three_part->users->count();
+        $html[] = '<div class="d-flex align-items-center">';
+        $html[] = '<a href="/calendar/'.$ymd.'/3" class="m-0 p-0">3部</a>';
+        $html[] = '<p class="m-0">'.$three_part_count.'</p>';
+        $html[] = '</div>';
+      }
+      $html[] = '</div>';
 
-    return ['one_part_count' => $one_part_count, 'two_part_count' => $two_part_count, 'three_part_count' => $three_part_count];
+      return implode("", $html);
   }
 
 

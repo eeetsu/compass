@@ -19,18 +19,8 @@ class CalendarsController extends Controller
     public function show(){
         // 月初と月末の日付を取得
         $first_day_of_month = date('Y-m-01'); // 当月の1日を取得
-        $last_day_of_month = date('Y-m-t'); // 当月の末日を取得
-
-        // 現在の日時を取得して、CalendarViewオブジェクトを作成する
         $calendar = new CalendarView(time());
-
-        // 各部の予約者数を取得する
-        $one_part_count = ReserveSettings::whereBetween('setting_reserve', [$first_day_of_month, $last_day_of_month])->where('setting_part', '1')->with('users')->count();
-        $two_part_count = ReserveSettings::whereBetween('setting_reserve', [$first_day_of_month, $last_day_of_month])->where('setting_part', '2')->with('users')->count();
-        $three_part_count = ReserveSettings::whereBetween('setting_reserve', [$first_day_of_month, $last_day_of_month])->where('setting_part', '3')->with('users')->count();
-
-        // calendar.blade.phpビューにデータを渡して表示する
-        return view('authenticated.calendar.admin.calendar', compact('calendar', 'one_part_count', 'two_part_count', 'three_part_count'));
+        return view('authenticated.calendar.admin.calendar', compact('calendar'));
     }
 
 
