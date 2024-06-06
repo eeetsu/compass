@@ -393,3 +393,9 @@ li {
   text-align: center;
   margin: 10px;
 }
+
+.info {
+  color: #03AAD2;
+  background-color: #F1F7FE;
+  border: none;
+}
