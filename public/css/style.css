@@ -284,13 +284,13 @@ li {
   background: #FFF;
 }
 
-.subject_edit_btn {
+.js-accordion-title {
   font-size: 12px;
   color: #0000FF;
   cursor: pointer;
 }
 
-.subject_inner {
+.accordion-content {
   display: none;
 }
 
@@ -318,4 +318,78 @@ li {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+}
+
+/* アコーディオン */
+
+.accordion-title {
+  position: relative;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+}
+
+
+.accordion-title::after {
+  border-right: solid 2px;
+  border-top: solid 2px;
+  content: "";
+  display: inline-flex;
+  height: 8px;
+  right: 25px;
+  top: 38%;
+  transform: rotate(135deg);
+  transition: transform .3s ease-in-out, top .3s ease-in-out;
+  width: 8px;
+}
+
+
+.accordion-title.open::after {
+  top: 45%;
+  transform: rotate(-45deg);
+}
+
+.accordion-title-search {
+  position: relative;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  color: black;
+}
+
+
+.accordion-title-search::after {
+  border-right: solid 2px;
+  border-top: solid 2px;
+  content: "";
+  display: inline-flex;
+  height: 8px;
+  right: 25px;
+  top: 38%;
+  transform: rotate(135deg);
+  transition: transform .3s ease-in-out, top .3s ease-in-out;
+  width: 8px;
+  color: black;
+}
+
+
+.accordion-title-search.open::after {
+  top: 45%;
+  transform: rotate(-45deg);
+  color: black;
+}
+
+.subject-select {
+  display: flex;
+}
+
+.checkbox-space {
+  margin: 5px;
+}
+
+.search-reset {
+  text-align: center;
+  margin: 10px;
 }
