@@ -13,12 +13,12 @@ $(function () {
   });
 
 
-//プロフィール詳細画面の「選択科目の編集」のアコーディオン（開閉ボタンの設置）
-// タイトルをクリックすると
+  //プロフィール詳細画面の「選択科目の編集」のアコーディオン（開閉ボタンの設置）
+  // タイトルをクリックすると
   $(".js-accordion-title-search").on("click", function () {
-  // クリックした次の要素を開閉
-  $('.accordion-content').slideToggle();
-  // タイトルにopenクラスを付け外しして矢印の向きを変更
-  $(this).toggleClass("open", 300);
-});
+    // クリックした次の要素を開閉
+    $(this).next().slideToggle(300);
+    // タイトルにopenクラスを付け外しして矢印の向きを変更
+    $(this).toggleClass("open", 300);
+  });
 });

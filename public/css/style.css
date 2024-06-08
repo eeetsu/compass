@@ -43,7 +43,13 @@ li {
   background: #D3D3D3;
 }
 
+
 .day-sat {
+  color: #0000FF;
+}
+
+.day-blank.day-sat {
+  background: #D3D3D3;
   color: #0000FF;
 }
 
@@ -360,6 +366,7 @@ li {
 }
 
 
+
 .accordion-title-search::after {
   border-right: solid 2px;
   border-top: solid 2px;
@@ -394,8 +401,41 @@ li {
   margin: 10px;
 }
 
-.info {
-  color: #03AAD2;
-  background-color: #F1F7FE;
-  border: none;
+
+
+
+.btn-pink_pink:hover,
+.btn-pink_pink:focus,
+.btn-pink_pink:active,
+.btn-pink_pink:active:focus,
+.btn-pink_pink:active:hover,
+.btn-pink_pink:active.focus,
+.btn-pink_pink.active,
+.btn-pink_pink.active:focus,
+.btn-pink_pink.active:hover,
+.btn-pink_pink.active.focus,
+.open>.dropdown-toggle.btn-pink_pink,
+.open>.dropdown-toggle.btn-pink_pink:hover,
+.open>.dropdown-toggle.btn-pink_pink:focus,
+.open>.dropdown-toggle.btn-pink_pink.focus,
+.btn-pink_pink.disabled:hover,
+.btn-pink_pink[disabled]:hover,
+fieldset[disabled] .btn-pink_pink:hover,
+.btn-pink_pink.disabled:focus,
+.btn-pink_pink[disabled]:focus,
+fieldset[disabled] .btn-pink_pink:focus,
+.btn-pink_pink.disabled.focus,
+.btn-pink_pink[disabled].focus,
+fieldset[disabled] .btn-pink_pink.focus {
+  background: #ff69b4;
+  color: #fff;
+}
+
+.btn-pink_pink.outline {
+  border: 3px solid #ff69b4;
+  color: #fff;
+}
+
+.btn-info {
+  text-align: center;
 }

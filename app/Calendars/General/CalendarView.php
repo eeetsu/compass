@@ -72,6 +72,7 @@ foreach($days as $day){
               //過去（予約した〇〇部参加の表示）
               $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px;color: black;" >'. $part .'部参加</p>';
               $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+              $html[] = '<input type="hidden" name="getPart[]"  form="reserveParts">';
             }else{
               //未来（予約するボタンの設置、参加する部　　予約したのをキャンセルするボタンの設定）
               //予約ボタンの設定
