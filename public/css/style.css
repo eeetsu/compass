@@ -265,6 +265,7 @@ li {
 }
 
 /* ユーザー検索 */
+/* 親要素の疑似要素 */
 .reserve_users_area {
   display: flex;
   flex-wrap: wrap;
@@ -275,22 +276,43 @@ li {
   overflow: scroll;
   padding: 10px;
   border-radius:
-    justify-content: flex-start;
 }
+
+
+/* 子要素 */
+.one_person {
+  width: 100%;
+  height: 30%;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 22%;
+  padding: 10px;
+  justify-content: flex-start;
+}
+
+
+/* 親要素の疑似要素 */
+.reserve_users_area::after {
+  content: "";
+  display: block;
+  width: 22%;
+  /* 子要素と同じ幅 */
+}
+
+.reserve_users_area::before {
+  content: "";
+  display: block;
+  width: 22%;
+  /* 子要素と同じ幅 */
+  order: 1;
+  /* アイテムの並び順 */
+}
+
 
 .reserve_users_area span {
   font-size: 12px;
 }
 
-.one_person {
-  width: 250px;
-  height: 250px;
-  background-color: #fff;
-  border-radius: 10px;
-  margin: 10px;
-  width: 28%;
-  padding: 20px;
-}
 
 .search_conditions span {
   cursor: pointer;
