@@ -9,15 +9,15 @@
           </div>
           <div>
             @if(Auth::id() == $post->user_id)
-            <span class="edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
-            <a href="{{ route('post.delete', ['id' => $post->id]) }}"onclick="return confirm('この投稿を削除します。よろしいでしょうか？')">削除</a>
+            <button class="btn btn-primary"><span class="edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span></button>
+            <a href="{{ route('post.delete', ['id' => $post->id]) }}"onclick="return confirm('この投稿を削除します。よろしいでしょうか？')" class="btn btn-danger">削除</a>
             @endif
           </div>
         </div>
 
         <!-- 投稿したカテゴリーボタンの表示 （エラー起きないように、とりあえず）-->
       @foreach($post->subCategories as $subcategory)
-      <span class="category_btn_b">{{ $subcategory->sub_category }}</span>
+      <span class="btn btn-info btn-sm">{{ $subcategory->sub_category }}</span>
       @endforeach
 
         <div class="contributor d-flex">

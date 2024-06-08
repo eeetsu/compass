@@ -305,6 +305,7 @@ li {
   display: none;
 }
 
+
 .login-box {
   width: 98vw;
   max-width: 500px;
@@ -461,7 +462,14 @@ tbody tr:nth-child(even) .table-thead-in {
   background-color: #afdfe4;
 }
 
+.keyword-search {
+  display: flex;
+  width: 100%;
+}
 
+.wide-box {
+  width: 65%;
+}
 
 
 .btn-pink_pink:hover,

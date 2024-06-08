@@ -12,7 +12,7 @@
 
       <!-- 投稿したカテゴリーボタンの表示・サブカテゴリー検索で表示-->
       @foreach($post->subCategories as $subcategory)
-      <span class="category_btn_b" name="sub">{{ $subcategory->sub_category }}</span>
+      <span class="btn btn-info btn-sm" name="sub">{{ $subcategory->sub_category }}</span>
       @endforeach
 
       <div class="post_bottom_area d-flex">
@@ -34,41 +34,39 @@
     </div>
     @endforeach
   </div>
-  <div class="other_area border w-25">
+<div class="other_area border w-25">
     <div class="border m-4">
-      <div class=""><a href="{{ route('post.input') }}" class="btn btn-info">　投稿　</a></div>
-      <div class="">
-        <input type="text" placeholder="キーワードを検索" name="keyword" form="postSearchRequest">
-        <input type="submit" value="　検索　" form="postSearchRequest" class="btn btn-info">
-      </div>
-      <input type="submit" name="like_posts" class="btn btn-pink_pink" value="　いいねした投稿　" form="postSearchRequest">
-      <input type="submit" name="my_posts" class="btn btn-warning" value="　自分の投稿　" form="postSearchRequest">
+      <div class=""><a href="{{ route('post.input') }}" class="btn btn-info">　　投稿　　</a></div>
+        <div class="keyword-search">
+          <input type="text" placeholder="キーワードを検索" class="wide-box" name="keyword" form="postSearchRequest">
+          <input type="submit" value="　　検索　　" form="postSearchRequest" class="btn btn-info">
+        </div>
+        <div class="keyword-search">
+          <input type="submit" name="like_posts" class="btn btn-pink_pink" value="　 いいねした投稿 　" form="postSearchRequest" width="50%">
+          <input type="submit" name="my_posts" class="btn btn-warning" value="　 自分の投稿 　 " form="postSearchRequest" width="50%">
+        </div>
       <label>カテゴリー検索</label>
 
       <div class="sub_btn">
           <ul>
+            <!-- メインカテゴリー -->
             @foreach($categories as $category)
-
-            <div class="">
-              <li class="main_categories" category_id="{{ $category->id }}"><span class="accordion-title-search-two js-accordion-title-search-two">{{ $category->main_category }}<span></li>
-              <div class="accordion-content-two">
-
-                @foreach($category->subcategories as $subcategory)
-            </div>
-              <div class="">
-                <li class="sub_categories" category_id="{{ $subcategory->id }}"><span class="accordion-title-search-two js-accordion-title-search-two">{{ $subcategory->sub_category }}<span></li>
-                  <div class="accordion-content-two">
-                  @endforeach
-
-                  <!-- サブカテゴリーでの検索 -->
-                  @foreach($category->subcategories as $subcategory)
-                  <input type="submit" name="sub_categories" class="category_btn_b" value="{{ $subcategory->sub_category }}" form="postSearchRequest">
-                  @endforeach
-                  </div>
-              </div>
-
+              <li class="main_categories" category_id="{{ $category->id }}">
+                <span class="accordion-title-search-two js-accordion-title-search-two">{{ $category->main_category }}<span></li>
+                  <ul class="accordion-content-two">
+                    <!-- メインカテゴリーに紐づいたサブカテゴリー -->
+                      @foreach($category->subcategories as $subcategory)
+                        <li class="sub_categories sub_category_{{$subcategory->id}}" category_id="{{$subcategory->id}}">
+                          <span class="">{{ $subcategory->sub_category }}</span>
+                        </li>
+                      @endforeach
+                      <!-- サブカテゴリーでの検索 -->
+                      @foreach($category->subcategories as $subcategory)
+                      <input type="submit" name="sub_categories" class="category_btn_b" value="{{ $subcategory->sub_category }}" form="postSearchRequest">
+                      @endforeach
+                  </ul>
             @endforeach
-            </ul>
+          </ul>
       </div>
     </div>
   <form action="{{ route('post.show') }}" method="get" id="postSearchRequest"></form>
