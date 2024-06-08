@@ -300,6 +300,10 @@ li {
   display: none;
 }
 
+.accordion-content-two {
+  display: none;
+}
+
 .login-box {
   width: 98vw;
   max-width: 500px;
@@ -383,6 +387,38 @@ li {
 
 
 .accordion-title-search.open::after {
+  top: 45%;
+  transform: rotate(-45deg);
+  color: black;
+}
+
+.accordion-title-search-two {
+  position: relative;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  color: black;
+}
+
+
+
+.accordion-title-search-two::after {
+  border-right: solid 2px;
+  border-top: solid 2px;
+  content: "";
+  display: inline-flex;
+  height: 8px;
+  right: 25px;
+  top: 38%;
+  transform: rotate(135deg);
+  transition: transform .3s ease-in-out, top .3s ease-in-out;
+  width: 8px;
+  color: black;
+}
+
+
+.accordion-title-search-two.open::after {
   top: 45%;
   transform: rotate(-45deg);
   color: black;
