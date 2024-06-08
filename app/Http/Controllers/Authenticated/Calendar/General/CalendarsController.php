@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Authenticated\Calendar\General;
 
+use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Calendars\General\CalendarView;

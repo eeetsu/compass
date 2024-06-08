@@ -1,7 +1,8 @@
 @extends('layouts.sidebar')
 
 @section('content')
-<p>ユーザー検索</p>
+<div >ユーザー検索</div>
+
 <div class="search_content w-100 border d-flex">
   <div class="reserve_users_area">
     @if($users->count() > 0)

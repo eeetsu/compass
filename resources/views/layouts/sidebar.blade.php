@@ -22,15 +22,25 @@
 
       <p><a href="{{ route('top.show') }}"><img src="{{ asset('image/top.png' ) }}" width="20" height="20">マイページ</a></p>
       <p><a href="/logout"><img src="{{ asset('image/logout.png' ) }}" width="20" height="20">ログアウト</a></p>
+      @can('admin')
       <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/reserve.png' ) }}" width="20" height="20">スクール予約</a></p>
-
       <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/school.png' ) }}" width="20" height="20">スクール予約確認</a></p>
-
       <p><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/schoolreserve.png' ) }}" width="20" height="20">スクール枠登録</a></p>
-
       <p><a href="{{ route('post.show') }}"><img src="{{ asset('image/keiziban.png' ) }}" width="20" height="20">掲示板</a></p>
-
       <p><a href="{{ route('user.show') }}"><img src="{{ asset('image/user.png' ) }}" width="20" height="20">ユーザー検索</a></p>
+      @endcan
+      @can('edit')
+      <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/reserve.png' ) }}" width="20" height="20">スクール予約</a></p>
+      <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/school.png' ) }}" width="20" height="20">スクール予約確認</a></p>
+      <p><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/schoolreserve.png' ) }}" width="20" height="20">スクール枠登録</a></p>
+      <p><a href="{{ route('post.show') }}"><img src="{{ asset('image/keiziban.png' ) }}" width="20" height="20">掲示板</a></p>
+      <p><a href="{{ route('user.show') }}"><img src="{{ asset('image/user.png' ) }}" width="20" height="20">ユーザー検索</a></p>
+      @endcan
+      @can('read')
+      <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/reserve.png' ) }}" width="20" height="20">スクール予約</a></p>
+      <p><a href="{{ route('post.show') }}"><img src="{{ asset('image/keiziban.png' ) }}" width="20" height="20">掲示板</a></p>
+      <p><a href="{{ route('user.show') }}"><img src="{{ asset('image/user.png' ) }}" width="20" height="20">ユーザー検索</a></p>
+      @endcan
       @show
     </div>
     <div class="main-container">

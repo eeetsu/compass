@@ -11,6 +11,10 @@
   background: #ECF1F6;
 }
 
+p {
+  font-size: 16px
+}
+
 ul,
 li {
   list-style: none;
@@ -168,7 +172,7 @@ li {
 }
 
 .detsail_post {
-  font-size: 12px;
+  font-size: 16px;
   color: #9E9E9E;
 }
 
@@ -264,13 +268,14 @@ li {
 .reserve_users_area {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   width: 800px;
   margin: 10px auto;
   height: 80vh;
   overflow: scroll;
   padding: 10px;
-  background: #FFF;
-  border-radius: 5px;
+  border-radius:
+    justify-content: flex-start;
 }
 
 .reserve_users_area span {
@@ -280,6 +285,11 @@ li {
 .one_person {
   width: 250px;
   height: 250px;
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 10px;
+  width: 28%;
+  padding: 20px;
 }
 
 .search_conditions span {
@@ -469,6 +479,11 @@ tbody tr:nth-child(even) .table-thead-in {
 
 .wide-box {
   width: 65%;
+}
+
+.comment-like {
+  margin-right: auto;
+
 }
 
 

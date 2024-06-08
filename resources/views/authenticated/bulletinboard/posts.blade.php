@@ -15,22 +15,24 @@
       <span class="btn btn-info btn-sm" name="sub">{{ $subcategory->sub_category }}</span>
       @endforeach
 
-      <div class="post_bottom_area d-flex">
-        <div class="d-flex post_status">
-          <div class="mr-5">
-            <i class="fa fa-comment"></i><span class="">{{ $post->postComments->count() }}</span>
+
+
+          <div class="d-flex post_status">
+            <div class="mr-5">
+              <i class="fa fa-comment"></i><span class="">{{ $post->postComments->count() }}</span>
+            </div>
+            <div>
+              <p class="m-0">
+              @if(Auth::user()->is_Like($post->id))
+              <i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}">{{ $post->like_count }}</span>
+              @else
+              <i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}">{{ $post->like_count }}</span>
+              @endif
+              </p>
+            </div>
           </div>
-          <div>
-            <p class="m-0">
-            @if(Auth::user()->is_Like($post->id))
-            <i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}">{{ $post->like_count }}</span>
-            @else
-            <i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}">{{ $post->like_count }}</span>
-            @endif
-            </p>
-          </div>
-        </div>
-      </div>
+
+
     </div>
     @endforeach
   </div>
