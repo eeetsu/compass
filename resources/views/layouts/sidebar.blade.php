@@ -20,38 +20,17 @@
     <div class="sidebar">
       @section('sidebar')
 
+      <p><a href="{{ route('top.show') }}"><img src="{{ asset('image/top.png' ) }}" width="20" height="20">マイページ</a></p>
+      <p><a href="/logout"><img src="{{ asset('image/logout.png' ) }}" width="20" height="20">ログアウト</a></p>
+      <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/reserve.png' ) }}" width="20" height="20">スクール予約</a></p>
 
+      <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/school.png' ) }}" width="20" height="20">スクール予約確認</a></p>
 
-      {!! "<svg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px' fill='#fff'>" !!}
-{!! "<path d='M0 0h24v24H0z' fill='none'></path>" !!}
-{!! "<path d='M17 10H7v2h10v-2zm2-7h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-5-5H7v2h7v-2z'></path>" !!}
-{!! "</svg>" !!}
-<p><a href="{{ route('top.show') }}">マイページ</a></p>
+      <p><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/schoolreserve.png' ) }}" width="20" height="20">スクール枠登録</a></p>
 
+      <p><a href="{{ route('post.show') }}"><img src="{{ asset('image/keiziban.png' ) }}" width="20" height="20">掲示板</a></p>
 
-     <img src="https://lull-compass.com/image/icon/logout.svg" style="filter: invert(100%); background: transparent;">
-      <p><a href="/logout">ログアウト</a></p>
-
-      
-      @can('admin')
-      <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}">スクール予約</a></p>
-      <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}">スクール予約確認</a></p>
-      <p><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}">スクール枠登録</a></p>
-      <p><a href="{{ route('post.show') }}">掲示板</a></p>
-      <p><a href="{{ route('user.show') }}">ユーザー検索</a></p>
-      @endcan
-      @can('edit')
-      <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}">スクール予約</a></p>
-      <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}">スクール予約確認</a></p>
-      <p><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}">スクール枠登録</a></p>
-      <p><a href="{{ route('post.show') }}">掲示板</a></p>
-      <p><a href="{{ route('user.show') }}">ユーザー検索</a></p>
-      @endcan
-      @can('read')
-      <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}">スクール予約</a></p>
-      <p><a href="{{ route('post.show') }}">掲示板</a></p>
-      <p><a href="{{ route('user.show') }}">ユーザー検索</a></p>
-      @endcan
+      <p><a href="{{ route('user.show') }}"><img src="{{ asset('image/user.png' ) }}" width="20" height="20">ユーザー検索</a></p>
       @show
     </div>
     <div class="main-container">

@@ -7,7 +7,7 @@
       <div class="h-75 border">
         <table class="table">
           <thead>
-              <tr>
+              <tr class="table-thead" width="100%">
                 <th>ID</th>
                 <th>名前</th>
                 <th>場所</th>
@@ -16,9 +16,9 @@
           <tbody>
               @foreach($reservePersons as $reservePerson)
                 <tr class="text-center">
-                  <td>{{ $reservePerson->id }}</td>
-                  <td>{{ $reservePerson->over_name }} {{ $reservePerson->under_name }}</td>
-                  <td>リモート</td>
+                  <td class="table-thead-in">{{ $reservePerson->id }}</td>
+                  <td class="table-thead-in">{{ $reservePerson->over_name }} {{ $reservePerson->under_name }}</td>
+                  <td class="table-thead-in">リモート</td>
                 </tr>
               @endforeach
           </tbody>

@@ -18,7 +18,7 @@ li {
 
 /* サイドバー */
 .sidebar {
-  width: 150px;
+  width: 15%;
   height: 100vh;
   background-color: #03AAD2;
   font-weight: bold;
@@ -247,6 +247,7 @@ li {
   display: block;
   -webkit-tap-highlight-color: transparent;
   margin-bottom: 5px;
+  width: fit-content;
 }
 
 .sub_btn {
@@ -435,6 +436,29 @@ li {
 .search-reset {
   text-align: center;
   margin: 10px;
+}
+
+.table-thead {
+  background-color: #03AAD2;
+  color: #fff;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+}
+
+
+.table-thead,
+.table-thead-in {
+  border: 1px solid #ddd;
+}
+
+th,
+.table-thead-in {
+  padding: 15px;
+}
+
+tbody tr:nth-child(even) .table-thead-in {
+  background-color: #afdfe4;
 }
 
 
