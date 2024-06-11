@@ -27,8 +27,8 @@ function render(){
     $html[] = '<th>水</th>';
     $html[] = '<th>木</th>';
     $html[] = '<th>金</th>';
-    $html[] = '<th>土</th>';
-    $html[] = '<th>日</th>';
+    $html[] = '<th class="day-sat">土</th>';
+    $html[] = '<th class="day-sun">日</th>';
     $html[] = '</tr>';
     $html[] = '</thead>';
     $html[] = '<tbody>';
@@ -44,7 +44,7 @@ foreach($days as $day){
   $toDay = $this->carbon->copy()->format("Y-m-d");
 
   if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-    $html[] = '<td class="past-day border">';
+    $html[] = '<td class="past-day border '.$day->getClassName().'">';
   }else{
     $html[] = '<td class="border '.$day->getClassName().'">';
 

@@ -44,8 +44,8 @@
           <input type="submit" value="　　検索　　" form="postSearchRequest" class="btn btn-info">
         </div>
         <div class="keyword-search">
-          <input type="submit" name="like_posts" class="btn btn-pink_pink" value="　 いいねした投稿 　" form="postSearchRequest" width="50%">
-          <input type="submit" name="my_posts" class="btn btn-warning" value="　 自分の投稿 　 " form="postSearchRequest" width="50%">
+          <input type="submit" name="like_posts" class="btn-pink_pink" value="　 いいねした投稿 　" form="postSearchRequest" width="50%">
+          <input type="submit" name="my_posts" class="btn-yellow_yellow" value="　 自分の投稿 　 " form="postSearchRequest" width="50%">
         </div>
       <label>カテゴリー検索</label>
 
@@ -54,12 +54,12 @@
             <!-- メインカテゴリー -->
             @foreach($categories as $category)
               <li class="main_categories" category_id="{{ $category->id }}">
-                <span class="accordion-title-search-two js-accordion-title-search-two">{{ $category->main_category }}<span></li>
-                  <ul class="accordion-content-two">
+                <span class="accordion-categories js-accordion-categories" category_id="{{ $category->id }}">{{ $category->main_category }}</span></li>
+                  <ul class="accordion-sub-categories category_{{$category->id}}">
                     <!-- メインカテゴリーに紐づいたサブカテゴリー -->
                       @foreach($category->subcategories as $subcategory)
                         <li class="sub_categories sub_category_{{$subcategory->id}}" category_id="{{$subcategory->id}}">
-                          <span class="">{{ $subcategory->sub_category }}</span>
+                          <span class="accordion-sub-categories" subcategory_id="{{ $subcategory->id }}">{{ $subcategory->sub_category }}</span>
                         </li>
                       @endforeach
                       <!-- サブカテゴリーでの検索 -->

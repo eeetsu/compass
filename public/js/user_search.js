@@ -22,12 +22,4 @@ $(function () {
     $(this).toggleClass("open", 300);
   });
 
-
-  // タイトルをクリックすると
-  $(".js-accordion-title-search-two").on("click", function () {
-    // クリックした次の要素を開閉
-    $('.accordion-content-two').slideToggle();
-    // タイトルにopenクラスを付け外しして矢印の向きを変更
-    $(this).toggleClass("open", 300);
-  });
 });
