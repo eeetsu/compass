@@ -38,14 +38,14 @@
   </div>
 <div class="other_area border w-25">
     <div class="border m-4">
-      <div class=""><a href="{{ route('post.input') }}" class="btn btn-info">　　投稿　　</a></div>
+      <div class="post-b"><a href="{{ route('post.input') }}" style="text-decoration:none;" class="btn-post_post">投稿</a></div>
         <div class="keyword-search">
           <input type="text" placeholder="キーワードを検索" class="wide-box" name="keyword" form="postSearchRequest">
-          <input type="submit" value="　　検索　　" form="postSearchRequest" class="btn btn-info">
+          <input type="submit" value="検索" form="postSearchRequest" class="btn btn-info">
         </div>
         <div class="keyword-search">
-          <input type="submit" name="like_posts" class="btn-pink_pink" value="　 いいねした投稿 　" form="postSearchRequest" width="50%">
-          <input type="submit" name="my_posts" class="btn-yellow_yellow" value="　 自分の投稿 　 " form="postSearchRequest" width="50%">
+          <input type="submit" name="like_posts" class="btn-pink_pink" value="いいねした投稿" form="postSearchRequest" width="50%">
+          <input type="submit" name="my_posts" class="btn-yellow_yellow" value="自分の投稿" form="postSearchRequest" width="50%">
         </div>
       <label>カテゴリー検索</label>
 

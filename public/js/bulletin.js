@@ -5,41 +5,27 @@
 //  });
 // });
 
-// タイトルをクリックすると
-//$(".js-accordion-title-search-two").on("click", function () {
-// クリックした次の要素を開閉
-// $('.accordion-content-two').slideToggle();
-// タイトルにopenクラスを付け外しして矢印の向きを変更
-// $(this).toggleClass("open", 300);
-//});
 
-
-// タイトルをクリックすると
-// $(".js-accordion-title-search-two").on("click", function () {
-
-//   //  // クリックした次の要素を開閉
-//   $('.accordion-content-two').slideToggle();
-//   // タイトルにopenクラスを付け外しして矢印の向きを変更
-//   $(this).toggleClass("open", 300);
-// });
-
-
-
-//アコーディオン（追記箇所・お試し）
+//アコーディオン
 $(function () {
+  //メインカテゴリーをクリックすると、
   $('.js-accordion-categories').click(function () {
+    //該当のメインカテゴリーのidを取得
     var category_id = $(this).attr('category_id');
+    // 該当のメインカテゴリーに結びつくサブカテゴリーのidを取得し、スライドさせる
     $('.accordion-sub-categories.category_' + category_id).slideToggle();
   });
 
+  //メインカテゴリーをクリックすると、
   $(".js-accordion-categories").on("click", function () {
+    //該当のメインカテゴリーのidを取得
     var subcategory_id = $(this).attr('subcategory_id');
+    // 該当のメインカテゴリーに結びつくサブカテゴリーのidを取得し、スライドさせる
     $('.sub_category_' + subcategory_id).slideToggle();
+    //スライドをオープンする時の速さ
     $(this).toggleClass("open", 300);
   });
 });
-
-
 
 
 

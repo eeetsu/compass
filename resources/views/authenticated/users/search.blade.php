@@ -91,7 +91,7 @@
         <p class="accordion-title-search js-accordion-title-search"><span>検索条件の追加</span></p>
         <div class="accordion-content">
           <div>
-            <div>
+            <div class="area">
               <label>性別</label>
             </div>
             <span>男</span><input type="radio" name="sex" value="1" form="userSearchRequest">
@@ -99,7 +99,7 @@
             <span>その他</span><input type="radio" name="sex" value="3" form="userSearchRequest">
           </div>
           <div>
-            <div>
+            <div class="area">
               <label>権限</label>
             </div>
             <select name="role" form="userSearchRequest" class="engineer">
@@ -114,7 +114,7 @@
             <label>選択科目</label>
               <form class="subject-select"  action="{{ route('user.show') }}" method="get" id="userSearchRequest">
                   @foreach($subject_lists as $subject_list)
-                  <div>
+                  <div class="subject-select-box">
                     <label>{{ $subject_list->subject }}</label>
                     <input type="checkbox" name="subjects[]" value="{{ $subject_list->id }}">
                   </div>
@@ -125,11 +125,9 @@
           </div>
         </div>
       </div>
-      <div class="search-reset">
-        <input type="submit" class="btn btn-info" name="search_btn" value="　　　　　　検索　　　　　　" form="userSearchRequest">
-        </div>
-        <div class="search-reset">
-          <input type="reset" class="info" value="　　　　　リセット　　　　　" onclick="this.form.reset()" form="userSearchRequest">
+      <div class="search-reset-box">
+            <input type="submit" class="btn btn-info" name="search_btn" value="　　　　　　検索　　　　　　" form="userSearchRequest">
+            <input type="reset" class="btn-search_reset" value="　　　　　リセット　　　　　" onclick="this.form.reset()" form="userSearchRequest">
       </div>
     </div>
     <form action="{{ route('user.show') }}" method="get" id="userSearchRequest"></form>
