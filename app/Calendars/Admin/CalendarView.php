@@ -20,11 +20,11 @@ class CalendarView{
     $html[] = '<table class="table m-auto border">';
     $html[] = '<thead>';
     $html[] = '<tr>';
-    $html[] = '<th class="border">月</th>';
-    $html[] = '<th class="border">火</th>';
-    $html[] = '<th class="border">水</th>';
-    $html[] = '<th class="border">木</th>';
-    $html[] = '<th class="border">金</th>';
+    $html[] = '<th class="day-mon">月</th>';
+    $html[] = '<th class="day-tue">火</th>';
+    $html[] = '<th class="day-wed">水</th>';
+    $html[] = '<th class="day-thu">木</th>';
+    $html[] = '<th class="day-fri">金</th>';
     $html[] = '<th class="day-sat">土</th>';
     $html[] = '<th class="day-sun">日</th>';
     $html[] = '</tr>';

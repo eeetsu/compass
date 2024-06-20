@@ -22,11 +22,11 @@ function render(){
     $html[] = '<table class="table">';
     $html[] = '<thead>';
     $html[] = '<tr>';
-    $html[] = '<th>月</th>';
-    $html[] = '<th>火</th>';
-    $html[] = '<th>水</th>';
-    $html[] = '<th>木</th>';
-    $html[] = '<th>金</th>';
+    $html[] = '<th class="day-mon">月</th>';
+    $html[] = '<th class="day-tue">火</th>';
+    $html[] = '<th class="day-wed">水</th>';
+    $html[] = '<th class="day-thu">木</th>';
+    $html[] = '<th class="day-fri">金</th>';
     $html[] = '<th class="day-sat">土</th>';
     $html[] = '<th class="day-sun">日</th>';
     $html[] = '</tr>';
