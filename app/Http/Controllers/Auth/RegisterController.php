@@ -93,7 +93,7 @@ class RegisterController extends Controller
                 // }
 
                 DB::commit();
-                return view('auth.login.login');
+                return redirect()->route('login');
                 } catch(\Exception $e){
                 DB::rollback();
                 return redirect()->route('login');

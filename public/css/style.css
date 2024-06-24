@@ -654,6 +654,8 @@ tbody tr:nth-child(even) .table-thead-in {
 
 .sidebar-space {
   margin: 5px 0px 5px 15px;
+  display: block;
+  width: 100%;
 }
 
 
