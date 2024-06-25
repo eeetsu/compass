@@ -541,6 +541,9 @@ th {
   -webkit-box-shadow: 0 0 8px gray;
   background-color: #FFF;
   margin: 10%;
+  border-radius: 10px;
+  text-align: center;
+  padding: 5%;
 }
 
 .table-t {
@@ -681,9 +684,14 @@ tbody tr:nth-child(even) .table-thead-in {
 }
 
 .w-90 {
-  width: 100% !important;
+  width: 90% !important;
   height: auto;
+  padding: 5%;
+  margin: 5%;
+  background-color: #fff;
 }
+
+.text-center {}
 
 .sidebar-space {
   margin: 5px 0px 5px 15px;
