@@ -4,10 +4,11 @@
 <div class="vh-100 d-flex" style="align-items:center; justify-content:center;">
   <div class="w-50 m-auto h-75">
 
-  <div class="spaceーwhite">
-    <p><span>{{ $date }}日</span><span class="ml-3">{{ $part }}部</span></p>
-      <div class="h-75 border">
-        <table class="table">
+  <div class="">
+    <p class="table-b"><span>{{ $date }}日</span><span class="ml-3">{{ $part }}部</span></p>
+
+      <div class="table-y">
+        <table class="table-t">
           <thead>
               <tr class="table-thead" width="100%">
                 <th>ID</th>
@@ -26,6 +27,7 @@
           </tbody>
         </table>
       </div>
+
   </div>
 
   </div>

@@ -40,6 +40,7 @@ li {
 .user_status {
   border-radius: 10px;
   background: #FFF;
+  -webkit-box-shadow: 0 0 8px gray;
 }
 
 /* スクール予約関連 */
@@ -313,6 +314,7 @@ li {
   width: 22%;
   padding: 10px;
   justify-content: flex-start;
+  -webkit-box-shadow: 0 0 8px gray;
 }
 
 
@@ -368,7 +370,14 @@ li {
   padding: 25px 50px 40px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-box-shadow:
+  -webkit-box-shadow: 0 0 8px gray;
+}
+
+.border-t {
+  padding: 1rem !important;
+  width: 25% !important;
+  border: 1px solid #dee2e6 !important;
+  -webkit-box-shadow: 0 0 8px gray;
 }
 
 .atlas-img {
@@ -526,6 +535,30 @@ li {
 th {
   padding: 15px;
 
+}
+
+.calender-auto {
+  -webkit-box-shadow: 0 0 8px gray;
+  background-color: #FFF;
+  margin: 10%;
+}
+
+.table-t {
+  -webkit-box-shadow: 0 0 8px gray;
+  width: 65vw;
+  height: 10vh;
+  text-align: center;
+  border-radius: 10px;
+  position: absolute;
+  right: 10%;
+  margin-right: -25px;
+
+}
+
+
+
+.table-b {
+  text-align: left;
 }
 
 .table-thead-in {
