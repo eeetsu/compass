@@ -378,6 +378,7 @@ li {
   width: 25% !important;
   border: 1px solid #dee2e6 !important;
   -webkit-box-shadow: 0 0 8px gray;
+  border-radius: 10px;
 }
 
 .atlas-img {
@@ -417,6 +418,7 @@ li {
   transform: rotate(135deg);
   transition: transform .3s ease-in-out, top .3s ease-in-out;
   width: 8px;
+  margin: 3%;
 }
 
 
@@ -450,6 +452,7 @@ li {
   transition: transform .3s ease-in-out, top .3s ease-in-out;
   width: 8px;
   color: black;
+  margin: 4%;
 }
 
 
@@ -484,6 +487,7 @@ li {
   transition: transform .3s ease-in-out, top .3s ease-in-out;
   width: 8px;
   color: black;
+  margin: 4%;
 }
 
 
@@ -683,14 +687,6 @@ tbody tr:nth-child(even) .table-thead-in {
   padding: 20px;
 }
 
-.w-90 {
-  width: 90% !important;
-  height: auto;
-  padding: 5%;
-  margin: 5%;
-  background-color: #fff;
-}
-
 .text-center {}
 
 .sidebar-space {
@@ -705,4 +701,44 @@ tbody tr:nth-child(even) .table-thead-in {
   width: 50%;
   margin: auto;
   height: 75%;
+}
+
+
+.calendar-i {
+  padding: 3rem !important;
+  height: 85vh !important;
+  width: 80% !important;
+  border: 1px solid #dee2e6 !important;
+  box-sizing: border-box;
+  background-color: #FFF;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 8px gray;
+}
+
+
+
+.calendar-text-p {
+  text-align: center;
+}
+
+.calendar-button {
+  padding: 5%;
+}
+
+.calendar-iii {
+  width: 85%;
+  height: 75%;
+  padding: 5%;
+  margin: 5%;
+  background-color: #fff;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 8px gray;
+}
+
+.calender-m {
+  border: 1px solid #dee2e6
+}
+
+.calendar-button-two {
+  padding: 5% 0% 60% 0%;
 }
