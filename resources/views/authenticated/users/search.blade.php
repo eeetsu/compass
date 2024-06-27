@@ -1,9 +1,8 @@
 @extends('layouts.sidebar')
 
 @section('content')
-<div >ユーザー検索</div>
 
-<div class="search_content w-100 border d-flex">
+<div class="search_content-ii">
   <div class="reserve_users_area">
     @if($users->count() > 0)
     @foreach($users as $user)
