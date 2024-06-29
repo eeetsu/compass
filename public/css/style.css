@@ -120,7 +120,7 @@ li {
 /* モーダル */
 .modal {
   display: none;
-  height: 100vh;
+  /* height: 100vh; */
   position: fixed;
   top: 0;
   width: 100%;
@@ -128,7 +128,7 @@ li {
 
 .modal__bg {
   background: rgba(0, 0, 0, 0.8);
-  height: 100vh;
+  /* height: 100vh; */
   position: absolute;
   width: 100%;
 }
@@ -155,7 +155,7 @@ li {
 
 .post_create_area textarea {
   resize: none;
-  height: 300px;
+  /* height: 300px; */
   white-space: pre-wrap;
 }
 
@@ -213,7 +213,7 @@ li {
 }
 
 .modal-inner-body textarea {
-  height: 150px;
+  /* height: 150px; */
   resize: none;
 }
 
@@ -233,7 +233,7 @@ li {
 }
 
 .comment_area textarea {
-  height: 300px;
+  /*height: 300px; */
   resize: none;
 }
 
@@ -275,7 +275,7 @@ li {
   display: block;
   margin-bottom: 5px;
   width: 80%;
-  height: 40px;
+  /* height: 40px; */
   border-bottom: 2px solid #9E9E9E;
   background: #ECF1F6;
   text-align: left;
@@ -295,25 +295,23 @@ li {
 /* 親要素の疑似要素 */
 .reserve_users_area {
   display: flex;
+  gap: 5%;
   flex-wrap: wrap;
-  justify-content: space-between;
-  width: 800px;
-  margin: 10px auto;
-  height: 80vh;
+  /* justify-content: space-between; */
+  width: 55%;
+  margin: 5% 10% 10% 10%;
   overflow: scroll;
   padding: 10px;
-  border-radius:
+  border-radius: 10px;
 }
 
 
 /* 子要素 */
 .one_person {
-  width: 100%;
-  height: 40%;
   background-color: #fff;
   border-radius: 10px;
-  width: 30%;
-  padding: 10px;
+  width: 21%;
+  padding: 20px;
   justify-content: flex-start;
   -webkit-box-shadow: 0 0 8px gray;
 }
@@ -384,7 +382,7 @@ li {
 
 .atlas-img {
   width: 50%;
-  height: auto;
+  /* height: auto; */
   display: block;
   margin: 0 auto 40px;
   margin-left: 35%;
@@ -461,6 +459,13 @@ li {
   top: 45%;
   transform: rotate(-45deg);
   color: black;
+}
+
+.search_content-ii {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  border: 1px solid #dee2e6;
 }
 
 .accordion-categories {
@@ -545,7 +550,7 @@ th {
 .calender-auto {
   -webkit-box-shadow: 0 0 8px gray;
   background-color: #FFF;
-  margin: 10% 10% 30% 10%;
+  margin: 5% 10% 20% 10%;
   border-radius: 10px;
   text-align: center;
   padding: 5%;
@@ -554,7 +559,7 @@ th {
 .table-t {
   -webkit-box-shadow: 0 0 8px gray;
   width: 65vw;
-  height: 10vh;
+  /* height: 10vh; */
   text-align: center;
   border-radius: 10px;
   position: absolute;
@@ -697,23 +702,20 @@ tbody tr:nth-child(even) .table-thead-in {
 }
 
 
-.spaceーwhite {
+.space-white {
   border-radius: 5px;
   width: 50%;
   margin: auto;
-  height: 75%;
+  /* height: 75%; */
 }
 
 
 .calendar-i {
-  padding: 3rem !important;
-  height: 85vh !important;
-  width: 80% !important;
-  border: 1px solid #dee2e6 !important;
-  box-sizing: border-box;
-  background-color: #FFF;
-  border-radius: 10px;
   -webkit-box-shadow: 0 0 8px gray;
+  background-color: #FFF;
+  margin: 3% 10% 5% 10%;
+  border-radius: 10px;
+  padding: 1%;
 }
 
 
@@ -727,26 +729,13 @@ tbody tr:nth-child(even) .table-thead-in {
 }
 
 .calendar-iii {
-  width: 85%;
-  height: 85vh !important;
-  padding: 5%;
-  margin: 5%;
-  background-color: #fff;
-  border-radius: 10px;
   -webkit-box-shadow: 0 0 8px gray;
+  background-color: #FFF;
+  margin: 5% 10% 20% 10%;
+  border-radius: 10px;
+  padding: 5%;
 }
 
 .calender-m {
   border: 1px solid #dee2e6
-}
-
-.calendar-button-two {
-  padding: 5% 0% 60% 0%;
-}
-
-.search_content-ii {
-  width: 100% !important;
-  height: 150vh !important;
-  display: flex !important;
-  border: 1px solid #dee2e6 !important;
 }

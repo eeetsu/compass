@@ -60,6 +60,7 @@
     @endif
 
   </div>
+
   <div class="search_area w-25 border">
     <div class="">
       <div>
